@@ -1,28 +1,1171 @@
-<div class="slider-track" id="sliderTrack">
-  <!-- Слайд 1: Вирусный ролик и статистика -->
-  <div class="slide-item">
-    <img 
-      src="proof-stats.PNG" 
-      alt="Скриншот 1: 99 176 просмотров ролика" 
-      onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-stats.png';}">
-    <div class="slide-badge">01 / 03 · Охват: 99 176 просмотров</div>
-  </div>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Creator Lab — Практикум по созданию и монетизации ИИ-блогеров</title>
+  <meta name="description" content="Полный цикл запуска виртуального аватара: от создания стабильного персонажа до 100 000+ органических просмотров и автопродаж. Старт группы 8 октября.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- Слайд 2: Лицо ИИ-персонажа -->
-  <div class="slide-item">
-    <img 
-      src="proof-profile.PNG" 
-      alt="Скриншот 2: Лицо ИИ-аватара" 
-      onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-profile.png';}">
-    <div class="slide-badge">02 / 03 · Стабильное лицо персонажа</div>
-  </div>
+  <style>
+    :root {
+      --font-display: 'Space Grotesk', -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
 
-  <!-- Слайд 3: Автоматическая оплата -->
-  <div class="slide-item">
-    <img 
-      src="proof-payment.PNG" 
-      alt="Скриншот 3: Поступление оплаты +490 ₽" 
-      onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-payment.png';}">
-    <div class="slide-badge">03 / 03 · Автоматическая оплата +490 ₽</div>
-  </div>
-</div>
+      --ease-out-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-feedback: 140ms;
+      --duration-ui: 220ms;
+
+      --bg-root: #07080B;
+      --bg-surface: #0E1118;
+      --bg-surface-elevated: #151A24;
+      --bg-surface-glass: rgba(14, 17, 24, 0.85);
+
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --border-medium: rgba(255, 255, 255, 0.14);
+
+      --accent-warm: #FF6B35;
+      --accent-warm-soft: rgba(255, 107, 53, 0.12);
+      --accent-emerald: #10B981;
+
+      --text-primary: #F3F4F6;
+      --text-secondary: #9CA3AF;
+      --text-muted: #6B7280;
+
+      --radius-sm: 6px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 32px;
+
+      --shadow-ambient: 0 30px 60px -15px rgba(0, 0, 0, 0.85);
+      --shadow-warm-glow: 0 0 50px -10px rgba(255, 107, 53, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-root);
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-root);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(255, 107, 53, 0.08) 0%, transparent 45%),
+        linear-gradient(to bottom, transparent, rgba(7, 8, 11, 0.8));
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Навигация */
+    .top-nav {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--bg-surface-glass);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .brand-mark {
+      width: 10px;
+      height: 10px;
+      background: var(--accent-warm);
+      border-radius: 2px;
+      box-shadow: 0 0 12px var(--accent-warm);
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      color: var(--accent-emerald);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-emerald);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-emerald);
+    }
+
+    /* Кнопки */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 28px;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transform: translateZ(0);
+      transition: transform var(--duration-feedback) var(--ease-out-snappy),
+                  box-shadow var(--duration-ui) var(--ease-out-snappy),
+                  background-color var(--duration-ui) var(--ease-out-snappy);
+    }
+
+    .btn:active {
+      transform: scale(0.97) !important;
+    }
+
+    .btn-warm {
+      background: var(--accent-warm);
+      color: #FFFFFF;
+      box-shadow: 0 4px 20px -2px rgba(255, 107, 53, 0.4);
+    }
+
+    .btn-outline {
+      background: var(--bg-surface-elevated);
+      color: var(--text-primary);
+      border-color: var(--border-medium);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .btn-warm:hover {
+        background: #E85B27;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 26px -2px rgba(255, 107, 53, 0.55);
+      }
+      .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+    }
+
+    /* Hero */
+    .hero {
+      padding: 88px 0 64px;
+      text-align: center;
+    }
+
+    .hero-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5.5vw, 4.4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .hero-title .highlight {
+      color: var(--accent-warm);
+      display: inline-block;
+    }
+
+    .hero-lead {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 760px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .hero-tech-stack {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .tech-pill {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tech-pill span {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* Секция кейса */
+    .showcase-stage {
+      margin: 48px 0 88px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-xl);
+      padding: 48px 40px;
+      box-shadow: var(--shadow-ambient);
+      position: relative;
+    }
+
+    .stage-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .stage-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-warm);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .stage-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .stage-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    /* Карусель скриншотов */
+    .monitor-frame {
+      border-radius: var(--radius-lg);
+      background: #000000;
+      padding: 8px;
+      border: 1px solid var(--border-medium);
+      box-shadow: var(--shadow-warm-glow);
+      position: relative;
+      user-select: none;
+    }
+
+    .slider-viewport {
+      border-radius: calc(var(--radius-lg) - 6px);
+      overflow: hidden;
+      position: relative;
+      background: #000000;
+      aspect-ratio: 16 / 9;
+    }
+
+    .slider-track {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      transition: transform 320ms var(--ease-out-snappy);
+    }
+
+    .slide-item {
+      width: 33.333333%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+    }
+
+    .slide-item img {
+      max-width: 100%;
+      max-height: 100%;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .slide-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      background: rgba(7, 8, 11, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 4px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      color: #F3F4F6;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+    }
+
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 10px 4px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: width 240ms var(--ease-out-snappy), background-color 240ms ease-out;
+    }
+
+    .dot.active {
+      width: 24px;
+      background: var(--accent-warm);
+    }
+
+    .arrow-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform var(--duration-feedback) var(--ease-out-snappy),
+                  background-color var(--duration-ui) var(--ease-out-snappy);
+    }
+
+    .arrow-btn:active {
+      transform: scale(0.9);
+    }
+
+    /* Телеметрия */
+    .telemetry-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .telemetry-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+
+    .telemetry-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .telemetry-val {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .telemetry-val.green {
+      color: var(--accent-emerald);
+    }
+
+    .telemetry-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .telemetry-detail {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* Пайплайн 4 уроков */
+    .section-title-block {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 56px;
+    }
+
+    .section-headline {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .pipeline-step {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      transform: translateZ(0);
+      transition: transform var(--duration-ui) var(--ease-out-snappy),
+                  border-color var(--duration-ui) var(--ease-out-snappy);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .pipeline-step:hover {
+        transform: translateY(-4px);
+        border-color: var(--border-medium);
+        background: var(--bg-surface-elevated);
+      }
+    }
+
+    .step-index {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-warm);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-index::after {
+      content: "";
+      flex-grow: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+
+    .step-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .step-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .step-code-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      color: #93C5FD;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Регламент формата */
+    .format-strip {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 88px;
+    }
+
+    .format-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .format-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-warm);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .format-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .format-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    /* Тарифы */
+    .tariffs-container {
+      display: grid;
+      grid-template-columns: 0.95fr 1.1fr 0.95fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 96px;
+    }
+
+    .tier-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 48px 32px 36px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: visible;
+      transform: translateZ(0);
+      transition: transform var(--duration-ui) var(--ease-out-snappy);
+    }
+
+    .tier-card.primary-tier {
+      background: linear-gradient(180deg, rgba(255, 107, 53, 0.07) 0%, var(--bg-surface) 40%);
+      border: 2px solid var(--accent-warm);
+      box-shadow: var(--shadow-warm-glow);
+    }
+
+    .tier-tag {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-warm);
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 14px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+    }
+
+    .tier-header {
+      margin-bottom: 24px;
+    }
+
+    .tier-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .tier-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin: 16px 0 8px;
+    }
+
+    .tier-price {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .tier-summary {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      min-height: 48px;
+      margin-top: 12px;
+    }
+
+    .tier-deliverables {
+      list-style: none;
+      margin: 24px 0 36px;
+      flex-grow: 1;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 20px;
+    }
+
+    .tier-deliverables li {
+      font-size: 0.9rem;
+      color: #E2E8F0;
+      padding: 8px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+
+    .tier-deliverables li span.bullet {
+      color: var(--accent-warm);
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+
+    .tier-card .btn {
+      width: 100%;
+    }
+
+    /* FAQ */
+    .faq-section {
+      padding-bottom: 88px;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .faq-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 28px;
+    }
+
+    .faq-item h4 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .faq-item p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .site-footer {
+      padding: 48px 0 36px;
+      border-top: 1px solid var(--border-subtle);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    @media (max-width: 1024px) {
+      .pipeline-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .format-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .tariffs-container {
+        grid-template-columns: 1fr;
+      }
+      .stage-grid {
+        grid-template-columns: 1fr;
+      }
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .pipeline-grid {
+        grid-template-columns: 1fr;
+      }
+      .format-grid {
+        grid-template-columns: 1fr;
+      }
+      .showcase-stage {
+        padding: 24px 16px;
+      }
+      .hero {
+        padding: 56px 0 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Навигация -->
+  <nav class="top-nav">
+    <div class="container nav-content">
+      <a href="#" class="brand">
+        <div class="brand-mark"></div>
+        <div class="brand-title">AI CREATOR LAB</div>
+      </a>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span>СТАРТ 8 ОКТЯБРЯ · 5 МЕСТ В ГРУППЕ</span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Экран 1: Hero -->
+    <header class="hero container">
+      <div class="hero-meta">
+        <span>СТАРТ МИНИ-ГРУППЫ: 8 ОКТЯБРЯ</span>
+        <span>·</span>
+        <span>БЕЗ СЪЕМОК И ПОКАЗА СЕБЯ</span>
+      </div>
+
+      <h1 class="hero-title">
+        Запуск и монетизация <br>
+        <span class="highlight">ИИ-блогера</span> на автопилоте
+      </h1>
+
+      <p class="hero-lead">
+        Пошаговое создание виртуального персонажа со стабильным лицом: от генерации первого вирусного сценария до органического трафика и прямых оплат на карту. Понятно даже тем, кто начинает с нуля.
+      </p>
+
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="#tariffs" class="btn btn-warm">Выбрать формат участия</a>
+        <a href="#case" class="btn btn-outline">Исследовать разобранный кейс</a>
+      </div>
+
+      <div class="hero-tech-stack">
+        <div class="tech-pill">ENGINE: <span>OmniFlash / Kling</span></div>
+        <div class="tech-pill">CONSISTENCY: <span>LoRA Face Lock</span></div>
+        <div class="tech-pill">VOICE: <span>ElevenLabs Neural</span></div>
+        <div class="tech-pill">PLATFORM: <span>VK & Telegram</span></div>
+      </div>
+    </header>
+
+    <!-- Экран 2: Главный экспонат (Карусель скриншотов) -->
+    <section class="container" id="case">
+      <div class="showcase-stage">
+        <div class="stage-header">
+          <div>
+            <span class="stage-tag">Production Showcase // Case Data</span>
+            <h2 class="stage-title">Кейс «Рецепты бабушки Марии»</h2>
+          </div>
+          <div class="status-pill" style="color: var(--text-secondary); border-color: var(--border-subtle);">
+            ВЫРУЧКА БЕЗ СЪЕМОК: 100% ПАССИВ
+          </div>
+        </div>
+
+        <div class="stage-grid">
+          <!-- Студийный монитор со слайдером скриншотов -->
+          <div class="monitor-frame" id="caseSlider">
+            <div class="slider-viewport">
+              <div class="slider-track" id="sliderTrack">
+                <!-- Слайд 1: Вирусный ролик -->
+                <div class="slide-item">
+                  <img src="proof-stats.PNG" alt="Скриншот 1: 99 176 просмотров ролика" onerror="handleImgError(this, 'proof-stats.png')">
+                  <div class="slide-badge">01 / 03 · Охват: 99 176 просмотров</div>
+                </div>
+                <!-- Слайд 2: Персонаж -->
+                <div class="slide-item">
+                  <img src="proof-profile.PNG" alt="Скриншот 2: Лицо ИИ-аватара" onerror="handleImgError(this, 'proof-profile.png')">
+                  <div class="slide-badge">02 / 03 · Стабильное лицо персонажа</div>
+                </div>
+                <!-- Слайд 3: Оплата -->
+                <div class="slide-item">
+                  <img src="proof-payment.PNG" alt="Скриншот 3: Поступление оплаты" onerror="handleImgError(this, 'proof-payment.png')">
+                  <div class="slide-badge">03 / 03 · Автоматическая оплата +490 ₽</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Элементы управления -->
+            <div class="carousel-controls">
+              <button class="arrow-btn" id="prevSlide" aria-label="Назад">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="carousel-dots" id="carouselDots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+              </div>
+              <button class="arrow-btn" id="nextSlide" aria-label="Вперед">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Стек телеметрии -->
+          <div class="telemetry-stack">
+            <div class="telemetry-card">
+              <div class="telemetry-row">
+                <span class="telemetry-label">Вирусный охват</span>
+                <span class="telemetry-val">99 176</span>
+              </div>
+              <p class="telemetry-detail">Просмотров на одном видео про драники. Нулевые затраты на платную рекламу.</p>
+            </div>
+
+            <div class="telemetry-card">
+              <div class="telemetry-row">
+                <span class="telemetry-label">Автопродажи</span>
+                <span class="telemetry-val green">+490 ₽</span>
+              </div>
+              <p class="telemetry-detail">Прямой входящий платеж за сборник рецептов в момент просмотра видео пользователем.</p>
+            </div>
+
+            <div class="telemetry-card">
+              <div class="telemetry-row">
+                <span class="telemetry-label">Скорость сборки</span>
+                <span class="telemetry-val">14 дней</span>
+              </div>
+              <p class="telemetry-detail">От идеи персонажа до первых стабильных автоматических оплат цифрового продукта.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Экран 3: Программа 4 уроков -->
+    <section class="container" style="padding-bottom: 20px;">
+      <div class="section-title-block">
+        <span class="stage-tag">Curriculum // 4 Sessions</span>
+        <h2 class="section-headline">Программа курса по урокам</h2>
+        <p style="color: var(--text-secondary); font-size: 1.05rem;">
+          4 практических занятия в прямом эфире с демонстрацией экрана и разбором ваших генераций:
+        </p>
+      </div>
+
+      <div class="pipeline-grid">
+        <div class="pipeline-step">
+          <div class="step-index">SESSION // 01</div>
+          <h3 class="step-name">Ниша и аватар</h3>
+          <p class="step-text">Первое знакомство с нейросетями. Выбор темы и генерация персонажа с фиксацией единого лица для всех сцен.</p>
+          <div class="step-code-badge">FACE SEED LOCK</div>
+        </div>
+
+        <div class="pipeline-step">
+          <div class="step-index">SESSION // 02</div>
+          <h3 class="step-name">Сценарный алгоритм</h3>
+          <p class="step-text">Работа с текстовыми нейросетями. Готовый алгоритм написания сценария на 30 секунд с удержанием 80%+.</p>
+          <div class="step-code-badge">HOOK & RETENTION</div>
+        </div>
+
+        <div class="pipeline-step">
+          <div class="step-index">SESSION // 03</div>
+          <h3 class="step-name">Сборка и запуск</h3>
+          <p class="step-text">Оживление персонажа, генерация живого голоса и наложение звуков. Монтируем и публикуем первое видео.</p>
+          <div class="step-code-badge">RENDER & PUBLISH</div>
+        </div>
+
+        <div class="pipeline-step">
+          <div class="step-index">SESSION // 04</div>
+          <h3 class="step-name">Разбор и воронка</h3>
+          <p class="step-text">Анализ первых просмотров, докрутка ошибок и сессия ответов на вопросы. Настройка автоприема оплат.</p>
+          <div class="step-code-badge">Q&A MASTERMIND</div>
+        </div>
+      </div>
+
+      <!-- Регламент формата -->
+      <div class="format-strip">
+        <div class="format-grid">
+          <div>
+            <div class="format-label">ПЛАТФОРМА</div>
+            <div class="format-title">Яндекс Телемост</div>
+            <div class="format-desc">Прямой эфир с демонстрацией экрана и ответами на вопросы по ходу урока.</div>
+          </div>
+          <div>
+            <div class="format-label">ГРАФИК</div>
+            <div class="format-title">1 раз в неделю</div>
+            <div class="format-desc">День и время созвонов согласуются индивидуально со всей группой.</div>
+          </div>
+          <div>
+            <div class="format-label">СООБЩЕСТВО</div>
+            <div class="format-title">Группа в Telegram</div>
+            <div class="format-desc">Закрытый рабочий чат с поддержкой куратора между созвонами.</div>
+          </div>
+          <div>
+            <div class="format-label">АРХИВ</div>
+            <div class="format-title">Доступ на 6 месяцев</div>
+            <div class="format-desc">Записи всех уроков и шаблоны промптов сохраняются на полгода.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Экран 4: Тарифы -->
+    <section class="container" id="tariffs">
+      <div class="section-title-block">
+        <span class="stage-tag">Enrolment Options</span>
+        <h2 class="section-headline">Форматы участия</h2>
+        <p style="color: var(--text-secondary); font-size: 1.05rem;">
+          Количество мест в живой группе строго ограничено (до 5 человек) для сохранения качества ведения.
+        </p>
+      </div>
+
+      <div class="tariffs-container">
+        <!-- Тариф 1 -->
+        <div class="tier-card">
+          <div class="tier-header">
+            <h3 class="tier-title">Сам себе автор</h3>
+            <div class="tier-price-row">
+              <span class="tier-price">2 000 ₽</span>
+            </div>
+            <p class="tier-summary">Полный видеоразбор всей технологии и готовые шаблоны промптов для самостоятельного старта.</p>
+          </div>
+
+          <ul class="tier-deliverables">
+            <li><span class="bullet">/</span> Видеозапись сборки аватара от А до Я</li>
+            <li><span class="bullet">/</span> Шаблоны промптов для фиксации лица</li>
+            <li><span class="bullet">/</span> Стек нейросетей без лишних подписок</li>
+            <li><span class="bullet">/</span> Инструкция по генерации живого голоса</li>
+          </ul>
+
+          <a href="https://vk.me/veronika_production" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            Написать в ЛС ВКонтакте
+          </a>
+        </div>
+
+        <!-- Тариф 2 (Основной) -->
+        <div class="tier-card primary-tier">
+          <div class="tier-tag">СТАРТ 8 ОКТЯБРЯ · 5 МЕСТ</div>
+          <div class="tier-header">
+            <h3 class="tier-title">Мини-группа с поддержкой</h3>
+            <div class="tier-price-row">
+              <span class="tier-price">10 000 ₽</span>
+            </div>
+            <p class="tier-summary">
+              4 недели живой практики в Яндекс Телемосте. Собираем вашего персонажа вместе и доводим до первых публикаций.
+            </p>
+          </div>
+
+          <ul class="tier-deliverables">
+            <li><span class="bullet">✓</span> <strong>4 живых онлайн-урока</strong> в Яндекс Телемосте</li>
+            <li><span class="bullet">✓</span> Созвоны 1 раз в неделю в согласованное время</li>
+            <li><span class="bullet">✓</span> Показ экрана и разбор в реальном времени</li>
+            <li><span class="bullet">✓</span> <strong>Доступ к записям уроков на 6 месяцев</strong></li>
+            <li><span class="bullet">✓</span> Закрытая группа и чат поддержки в Telegram</li>
+            <li><span class="bullet">✓</span> Помощь куратора в фиксации лица персонажа</li>
+          </ul>
+
+          <a href="https://vk.me/veronika_production" target="_blank" rel="noopener noreferrer" class="btn btn-warm">
+            Занять место в группе
+          </a>
+        </div>
+
+        <!-- Тариф 3 -->
+        <div class="tier-card">
+          <div class="tier-header">
+            <h3 class="tier-title">Персонально под ключ</h3>
+            <div class="tier-price-row">
+              <span class="tier-price">35 000 ₽</span>
+            </div>
+            <p class="tier-summary">Мы берем техническую часть на себя: создаем персонажа под вашу тему и доводим вас до первых продаж.</p>
+          </div>
+
+          <ul class="tier-deliverables">
+            <li><span class="bullet">/</span> Создаем персонажа нашими руками под вашу нишу</li>
+            <li><span class="bullet">/</span> Настраиваем систему приема оплат на карту</li>
+            <li><span class="bullet">/</span> Личные созвоны один на один до результата</li>
+            <li><span class="bullet">/</span> Разбор и помощь в монтаже первых 10 видео</li>
+          </ul>
+
+          <a href="https://vk.me/veronika_production" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            Обсудить задачу в ЛС
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Экран 5: FAQ -->
+    <section class="container faq-section">
+      <div class="section-title-block">
+        <span class="stage-tag">Knowledge Base</span>
+        <h2 class="section-headline">Часто задаваемые вопросы</h2>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h4>Что делать, если я пропущу онлайн-созвон?</h4>
+          <p>Запись каждого созвона выкладывается в закрытую группу сразу после окончания эфира. Доступ ко всем записям сохраняется на 6 месяцев. Вопросы по уроку можно задать прямо в чате Telegram.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Как согласуется время для эфиров?</h4>
+          <p>Так как в группе всего 5 человек, перед стартом 8 октября мы проводим короткий опрос в Telegram и выбираем день и время, комфортные для всех участников.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Справлюсь ли я, если не разбираюсь в нейросетях?</h4>
+          <p>Да. Программа выстроена пошагово: преподаватель открывает экран через Яндекс Телемост, показывает каждый клик и объясняет логику понятным языком.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Что продавать, если нет своего продукта?</h4>
+          <p>Мы подробно разберем варианты: продажу простых полезных файлов (рецепты, чек-листы, шпаргалки), партнерские ссылки или заработок на рекламе после набора просмотров.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <p>© 2026 AI CREATOR LAB · ARCHITECTURE & AUTOMATION · ALL RIGHTS RESERVED</p>
+  </footer>
+
+  <!-- Скрипт карусели и проверки путей -->
+  <script>
+    function handleImgError(img, fallbackName) {
+      if (!img.dataset.triedFallback) {
+        img.dataset.triedFallback = "1";
+        img.src = fallbackName;
+      }
+    }
+
+    (function initSlider() {
+      const track = document.getElementById('sliderTrack');
+      const dots = document.querySelectorAll('#carouselDots .dot');
+      const prevBtn = document.getElementById('prevSlide');
+      const nextBtn = document.getElementById('nextSlide');
+      const sliderContainer = document.getElementById('caseSlider');
+
+      if (!track || !dots.length) return;
+
+      let currentIndex = 0;
+      const totalSlides = dots.length;
+      let autoPlayTimer = null;
+
+      function goToSlide(index) {
+        currentIndex = (index + totalSlides) % totalSlides;
+        track.style.transform = `translateX(-${currentIndex * 33.333333}%)`;
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === currentIndex);
+        });
+      }
+
+      function nextSlide() {
+        goToSlide(currentIndex + 1);
+      }
+
+      function prevSlide() {
+        goToSlide(currentIndex - 1);
+      }
+
+      function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayTimer = setInterval(nextSlide, 4500);
+      }
+
+      function stopAutoPlay() {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+      }
+
+      if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); startAutoPlay(); });
+      if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); startAutoPlay(); });
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const targetIndex = parseInt(dot.getAttribute('data-index'), 10);
+          goToSlide(targetIndex);
+          startAutoPlay();
+        });
+      });
+
+      if (sliderContainer) {
+        sliderContainer.addEventListener('mouseenter', stopAutoPlay);
+        sliderContainer.addEventListener('mouseleave', startAutoPlay);
+      }
+
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      track.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoPlay();
+      }, { passive: true });
+
+      track.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) nextSlide();
+          else prevSlide();
+        }
+        startAutoPlay();
+      }, { passive: true });
+
+      startAutoPlay();
+    })();
+  </script>
+
+</body>
+</html>
