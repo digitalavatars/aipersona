@@ -18,7 +18,7 @@
 
       --ease-out-snappy: cubic-bezier(0.16, 1, 0.3, 1);
       --duration-feedback: 140ms;
-      --duration-ui: 220ms;
+      --duration-ui: 240ms;
 
       --bg-root: #07080B;
       --bg-surface: #0E1118;
@@ -222,7 +222,7 @@
       line-height: 1.6;
     }
 
-    /* 3 снятия страха */
+    /* 3 страха */
     .fears-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -255,7 +255,7 @@
       line-height: 1.5;
     }
 
-    /* Шоукейс видео */
+    /* Шоукейс */
     .showcase-stage {
       margin: 64px 0 88px;
       background: var(--bg-surface);
@@ -293,28 +293,121 @@
       align-items: center;
     }
 
+    /* Интерактивная карусель скриншотов */
     .monitor-frame {
       border-radius: var(--radius-lg);
-      background: #000;
-      padding: 8px;
+      background: #000000;
+      padding: 10px;
       border: 1px solid var(--border-medium);
       box-shadow: 0 0 35px -8px rgba(255, 107, 53, 0.25);
+      position: relative;
+      user-select: none;
     }
 
-    .monitor-inner {
+    .slider-viewport {
       border-radius: calc(var(--radius-lg) - 6px);
       overflow: hidden;
-      background: #000;
-    }
-
-    .monitor-inner video {
-      width: 100%;
-      height: auto;
-      display: block;
+      position: relative;
+      background: #07080B;
       aspect-ratio: 16 / 9;
-      object-fit: cover;
     }
 
+    .slider-track {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      transition: transform 320ms var(--ease-out-snappy);
+    }
+
+    .slide-item {
+      width: 33.333333%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+    }
+
+    .slide-item img {
+      max-width: 100%;
+      max-height: 100%;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .slide-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      background: rgba(7, 8, 11, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      color: #F8FAFC;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      pointer-events: none;
+    }
+
+    /* Панель навигации карусели */
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 10px 4px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: width 240ms var(--ease-out-snappy), background-color 240ms ease-out;
+    }
+
+    .dot.active {
+      width: 24px;
+      background: var(--accent-warm);
+    }
+
+    .arrow-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform var(--duration-feedback) var(--ease-out-snappy),
+                  background-color var(--duration-ui) var(--ease-out-snappy);
+    }
+
+    .arrow-btn:active {
+      transform: scale(0.88);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .arrow-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--border-medium);
+      }
+    }
+
+    /* Телеметрия */
     .telemetry-stack {
       display: flex;
       flex-direction: column;
@@ -353,7 +446,7 @@
       line-height: 1.4;
     }
 
-    /* Блок программы курса (4 урока) */
+    /* Программа */
     .section-title-block {
       text-align: center;
       max-width: 720px;
@@ -412,7 +505,7 @@
       line-height: 1.55;
     }
 
-    /* Формат обучения (Как проходит) */
+    /* Формат */
     .format-strip {
       background: var(--bg-surface-elevated);
       border: 1px solid var(--border-medium);
@@ -425,15 +518,6 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 24px;
-    }
-
-    .format-item {
-      text-align: left;
-    }
-
-    .format-item .icon {
-      font-size: 1.6rem;
-      margin-bottom: 10px;
     }
 
     .format-item h4 {
@@ -645,7 +729,7 @@
 
       <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
         <a href="#tariffs" class="btn btn-warm">Посмотреть форматы обучения</a>
-        <a href="#case" class="btn btn-outline">Посмотреть реальный пример на видео</a>
+        <a href="#case" class="btn btn-outline">Посмотреть реальные результаты</a>
       </div>
 
       <!-- 3 страха -->
@@ -668,34 +752,57 @@
       </div>
     </header>
 
-    <!-- Экран 2: Наглядный кейс с видео -->
+    <!-- Экран 2: Наглядный кейс (Интерактивная карусель скриншотов) -->
     <section class="container" id="case">
       <div class="showcase-stage">
         <div class="stage-header">
           <span class="stage-tag">Живой пример из практики</span>
           <h2 class="stage-title">Проект «Рецепты бабушки Марии»</h2>
           <p style="color: var(--text-secondary); font-size: 1.05rem;">
-            Посмотрите видео слева: этот персонаж полностью сгенерирован нейросетью. У него стабильное лицо, живой голос и уютные звуки кухни.
+            Посмотрите галерею доказательств: консистентное лицо виртуального персонажа, вирусные охваты и поток реальных оплат.
           </p>
         </div>
 
         <div class="stage-grid">
-          <div class="monitor-frame">
-            <div class="monitor-inner">
-              <video 
-                autoplay 
-                loop 
-                muted 
-                playsinline 
-                webkit-playsinline
-                preload="auto">
-                <source src="assets/carousel-preview.mp4" type="video/mp4">
-                <source src="carousel-preview.mp4" type="video/mp4">
-                Ваш браузер не воспроизводит видео.
-              </video>
+          <!-- Блок слайдера -->
+          <div class="monitor-frame" id="caseSlider">
+            <div class="slider-viewport">
+              <div class="slider-track" id="sliderTrack">
+                <!-- Слайд 1: Вирусный ролик -->
+                <div class="slide-item">
+                  <img src="assets/case-1.png" alt="Скриншот 1: 99 000 просмотров ролика">
+                  <div class="slide-badge">01 / 03 · Охваты: 99 176 просмотров</div>
+                </div>
+                <!-- Слайд 2: Лицо персонажа -->
+                <div class="slide-item">
+                  <img src="assets/case-2.png" alt="Скриншот 2: Лицо ИИ-аватара бабушки">
+                  <div class="slide-badge">02 / 03 · Персонаж с единым лицом</div>
+                </div>
+                <!-- Слайд 3: Чек оплат -->
+                <div class="slide-item">
+                  <img src="assets/case-3.png" alt="Скриншот 3: Поступление оплаты +490 ₽">
+                  <div class="slide-badge">03 / 03 · Входящие автоплатежи +490 ₽</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Управление слайдером -->
+            <div class="carousel-controls">
+              <button class="arrow-btn" id="prevSlide" aria-label="Предыдущий скриншот">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="carousel-dots" id="carouselDots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+              </div>
+              <button class="arrow-btn" id="nextSlide" aria-label="Следующий скриншот">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
             </div>
           </div>
 
+          <!-- Показатели -->
           <div class="telemetry-stack">
             <div class="telemetry-card">
               <div class="telemetry-val">99 000+</div>
@@ -725,7 +832,7 @@
       </div>
     </section>
 
-    <!-- Экран 3: Подробная программа обучения по 4 урокам -->
+    <!-- Экран 3: Программа курса -->
     <section class="container">
       <div class="section-title-block">
         <span class="stage-tag">Учебный план</span>
@@ -769,27 +876,22 @@
         </div>
       </div>
 
-      <!-- Плашка формата обучения -->
       <div class="format-strip">
         <div class="format-grid">
           <div class="format-item">
-            <div class="icon">🎥</div>
-            <h4>Яндекс Телемост</h4>
+            <h4>🎥 Яндекс Телемост</h4>
             <p>Живые созвоны с демонстрацией экрана. Всё видно в деталях, можно сразу переспросить.</p>
           </div>
           <div class="format-item">
-            <div class="icon">⏰</div>
-            <h4>Удобное время</h4>
+            <h4>⏰ Удобное время</h4>
             <p>Эфиры 1 раз в неделю. Точное время созвона согласовываем вместе со всей группой.</p>
           </div>
           <div class="format-item">
-            <div class="icon">💬</div>
-            <h4>Закрытая группа в ТГ</h4>
+            <h4>💬 Закрытая группа в ТГ</h4>
             <p>Постоянная связь с преподавателем и чат поддержки между занятиями.</p>
           </div>
           <div class="format-item">
-            <div class="icon">📂</div>
-            <h4>Доступ на полгода</h4>
+            <h4>📂 Доступ на полгода</h4>
             <p>Записи всех эфиров сохраняются у вас на 6 месяцев — можно пересматривать в любой момент.</p>
           </div>
         </div>
@@ -829,7 +931,7 @@
           </a>
         </div>
 
-        <!-- Тариф 2 (Основной фокус) -->
+        <!-- Тариф 2 -->
         <div class="tier-card primary-tier">
           <div class="tier-tag">СТАРТ 8 ОКТЯБРЯ · 5 МЕСТ</div>
           <div class="tier-header">
@@ -914,6 +1016,89 @@
   <footer class="site-footer container">
     <p>© 2026 AI CREATOR LAB · ПРАКТИКУМ ПО СОЗДАНИЮ ИИ-ПЕРСОНАЖЕЙ · СТАРТ 8 ОКТЯБРЯ</p>
   </footer>
+
+  <!-- Скрипт карусели: автоплей, свайпы и точки -->
+  <script>
+    (function initSlider() {
+      const track = document.getElementById('sliderTrack');
+      const dots = document.querySelectorAll('#carouselDots .dot');
+      const prevBtn = document.getElementById('prevSlide');
+      const nextBtn = document.getElementById('nextSlide');
+      const sliderContainer = document.getElementById('caseSlider');
+
+      if (!track || !dots.length) return;
+
+      let currentIndex = 0;
+      const totalSlides = dots.length;
+      let autoPlayTimer = null;
+
+      function goToSlide(index) {
+        currentIndex = (index + totalSlides) % totalSlides;
+        track.style.transform = `translateX(-${currentIndex * 33.333333}%)`;
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === currentIndex);
+        });
+      }
+
+      function nextSlide() {
+        goToSlide(currentIndex + 1);
+      }
+
+      function prevSlide() {
+        goToSlide(currentIndex - 1);
+      }
+
+      function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayTimer = setInterval(nextSlide, 4000);
+      }
+
+      function stopAutoPlay() {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+      }
+
+      // Клики по кнопкам
+      if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); startAutoPlay(); });
+      if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); startAutoPlay(); });
+
+      // Клики по точкам
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const targetIndex = parseInt(dot.getAttribute('data-index'), 10);
+          goToSlide(targetIndex);
+          startAutoPlay();
+        });
+      });
+
+      // Пауза автоплея при наведении курсора
+      if (sliderContainer) {
+        sliderContainer.addEventListener('mouseenter', stopAutoPlay);
+        sliderContainer.addEventListener('mouseleave', startAutoPlay);
+      }
+
+      // Поддержка мобильных свайпов (touch events)
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      track.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoPlay();
+      }, { passive: true });
+
+      track.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) nextSlide();
+          else prevSlide();
+        }
+        startAutoPlay();
+      }, { passive: true });
+
+      // Старт
+      startAutoPlay();
+    })();
+  </script>
 
 </body>
 </html>
