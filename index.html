@@ -733,7 +733,7 @@
     }
 
     .tier-header {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .tier-title {
@@ -747,7 +747,7 @@
       display: flex;
       align-items: baseline;
       gap: 6px;
-      margin: 16px 0 8px;
+      margin: 14px 0 8px;
     }
 
     .tier-price {
@@ -758,25 +758,26 @@
       line-height: 1;
     }
 
-    .tier-summary {
-      font-size: 0.92rem;
+    .tier-target-audience {
+      font-size: 0.9rem;
       color: var(--text-secondary);
-      min-height: 48px;
+      line-height: 1.5;
+      min-height: 52px;
       margin-top: 12px;
     }
 
     .tier-deliverables {
       list-style: none;
-      margin: 24px 0 36px;
+      margin: 20px 0 24px;
       flex-grow: 1;
       border-top: 1px solid var(--border-subtle);
-      padding-top: 20px;
+      padding-top: 18px;
     }
 
     .tier-deliverables li {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: #E2E8F0;
-      padding: 8px 0;
+      padding: 7px 0;
       display: flex;
       gap: 12px;
       align-items: flex-start;
@@ -787,6 +788,37 @@
       color: var(--accent-warm);
       font-family: var(--font-mono);
       font-weight: 700;
+    }
+
+    /* Блок конкретного результата в тарифе */
+    .tier-outcome {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-bottom: 24px;
+    }
+
+    .tier-outcome-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-warm);
+      margin-bottom: 4px;
+      display: block;
+      font-weight: 600;
+    }
+
+    .tier-outcome-text {
+      font-size: 0.88rem;
+      color: #F3F4F6;
+      line-height: 1.45;
+    }
+
+    .tier-card.primary-tier .tier-outcome {
+      background: rgba(255, 107, 53, 0.07);
+      border-color: rgba(255, 107, 53, 0.25);
     }
 
     .tier-card .btn {
@@ -1167,22 +1199,31 @@
         <!-- Тариф 1 -->
         <div class="tier-card">
           <div class="tier-header">
-            <h3 class="tier-title">Сам себе автор</h3>
+            <h3 class="tier-title">Инструкция и шаблоны</h3>
             <div class="tier-price-row">
               <span class="tier-price">2 000 ₽</span>
             </div>
-            <p class="tier-summary">Для тех, кто хочет изучить материалы в своем темпе и собрать персонажа самостоятельно.</p>
+            <p class="tier-target-audience">
+              Для тех, кто уже на базовом уровне владеет нейросетями и соцсетями, и хочет получить готовую проверенную схему без воды.
+            </p>
           </div>
 
           <ul class="tier-deliverables">
-            <li><span class="bullet">/</span> Подробная видеозапись сборки аватара</li>
-            <li><span class="bullet">/</span> Готовые шаблоны запросов для нейросетей</li>
-            <li><span class="bullet">/</span> Список проверенных сервисов для работы</li>
-            <li><span class="bullet">/</span> Инструкция по генерации живого голоса</li>
+            <li><span class="bullet">/</span> Пошаговый текстовый гайд по созданию персонажа</li>
+            <li><span class="bullet">/</span> Инструкция по генерации и монтажу первого ролика</li>
+            <li><span class="bullet">/</span> Готовые шаблоны запросов (промптов) для нейросетей</li>
+            <li><span class="bullet">/</span> Список проверенных сервисов без лишних оплат</li>
           </ul>
 
+          <div class="tier-outcome">
+            <span class="tier-outcome-label">Итог тарифа</span>
+            <p class="tier-outcome-text">
+              Четкая текстовая инструкция, по которой вы самостоятельно собираете персонажа в удобном темпе.
+            </p>
+          </div>
+
           <a href="https://vk.me/veronika_production" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-            Написать в ЛС ВКонтакте
+            Забрать инструкцию
           </a>
         </div>
 
@@ -1194,19 +1235,25 @@
             <div class="tier-price-row">
               <span class="tier-price">10 000 ₽</span>
             </div>
-            <p class="tier-summary">
-              4 недели практики в прямом эфире. Собираем вашего персонажа вместе и доводим до первых публикаций.
+            <p class="tier-target-audience">
+              Для тех, кто пока мало знаком с нейросетями и готов на практике пройти весь путь в группе при поддержке наставника.
             </p>
           </div>
 
           <ul class="tier-deliverables">
-            <li><span class="bullet">✓</span> <strong>4 живых занятия</strong> в Яндекс Телемосте</li>
-            <li><span class="bullet">✓</span> Встречи 1 раз в неделю в удобное время</li>
-            <li><span class="bullet">✓</span> Показ экрана и разбор ваших генераций</li>
-            <li><span class="bullet">✓</span> <strong>Доступ к записям уроков на 6 месяцев</strong></li>
-            <li><span class="bullet">✓</span> Закрытый чат поддержки в Telegram</li>
-            <li><span class="bullet">✓</span> Помощь наставника в фиксации лица персонажа</li>
+            <li><span class="bullet">✓</span> <strong>4 живых онлайн-урока</strong> в Яндекс Телемосте</li>
+            <li><span class="bullet">✓</span> Встречи 1 раз в неделю в согласованное время</li>
+            <li><span class="bullet">✓</span> Показ экрана и совместный разбор ваших работ</li>
+            <li><span class="bullet">✓</span> <strong>Доступ ко всем записям уроков на 6 месяцев</strong></li>
+            <li><span class="bullet">✓</span> Закрытая группа и чат поддержки в Telegram</li>
           </ul>
+
+          <div class="tier-outcome">
+            <span class="tier-outcome-label">Итог тарифа</span>
+            <p class="tier-outcome-text">
+              Готовый собранный персонаж под вашу нишу, выбранная концепция блога и опубликованные первые видео.
+            </p>
+          </div>
 
           <a href="https://vk.me/veronika_production" target="_blank" rel="noopener noreferrer" class="btn btn-warm">
             Занять место в группе
@@ -1220,15 +1267,25 @@
             <div class="tier-price-row">
               <span class="tier-price">35 000 ₽</span>
             </div>
-            <p class="tier-summary">Мы берем техническую часть на себя: создаем персонажа под вашу тему и помогаем с первыми продажами.</p>
+            <p class="tier-target-audience">
+              Для тех, кому нужен максимум индивидуального внимания, персональный разбор и передача технической части наставнику.
+            </p>
           </div>
 
           <ul class="tier-deliverables">
             <li><span class="bullet">/</span> Создание персонажа нашими руками под вашу тему</li>
-            <li><span class="bullet">/</span> Настройка системы приема оплат на вашу карту</li>
-            <li><span class="bullet">/</span> Личные созвоны один на один до результата</li>
             <li><span class="bullet">/</span> Помощь в создании и монтаже первых 10 видео</li>
+            <li><span class="bullet">/</span> Помощь в создании первого цифрового продукта (гайда)</li>
+            <li><span class="bullet">/</span> Настройка воронки продаж и приема оплат на карту</li>
+            <li><span class="bullet">/</span> Личные созвоны один на один до результата</li>
           </ul>
+
+          <div class="tier-outcome">
+            <span class="tier-outcome-label">Итог тарифа</span>
+            <p class="tier-outcome-text">
+              Полностью запущенный блог под ключ с вашим цифровым продуктом и настроенной воронкой автоматических продаж.
+            </p>
+          </div>
 
           <a href="https://vk.me/veronika_production" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
             Обсудить задачу в ЛС
