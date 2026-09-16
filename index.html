@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>AI Creator Lab — Практикум по созданию виртуального блогера</title>
   <meta name="description" content="Пошаговый запуск ИИ-персонажа: генерация стабильного лица, вирусные короткие видео и автоматические оплаты на карту. Старт мини-группы 8 октября.">
   
@@ -94,7 +94,7 @@
 
     /* Навигация */
     .top-nav {
-      padding: 18px 0;
+      padding: 16px 0;
       border-bottom: 1px solid var(--border-subtle);
       background: var(--bg-surface-glass);
       backdrop-filter: blur(16px);
@@ -107,14 +107,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
       color: var(--text-primary);
+      flex-shrink: 0;
     }
 
     .brand-mark {
@@ -130,19 +132,21 @@
       font-weight: 700;
       font-size: 1.15rem;
       letter-spacing: -0.02em;
+      white-space: nowrap;
     }
 
     .status-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 5px 14px;
+      padding: 5px 12px;
       border-radius: var(--radius-sm);
       background: rgba(16, 185, 129, 0.08);
       border: 1px solid rgba(16, 185, 129, 0.25);
       font-size: 0.78rem;
       font-family: var(--font-mono);
       color: var(--accent-emerald);
+      white-space: nowrap;
     }
 
     .status-dot {
@@ -151,6 +155,7 @@
       background: var(--accent-emerald);
       border-radius: 50%;
       box-shadow: 0 0 8px var(--accent-emerald);
+      flex-shrink: 0;
     }
 
     /* Кнопки */
@@ -160,6 +165,7 @@
       justify-content: center;
       gap: 10px;
       padding: 15px 28px;
+      min-height: 48px;
       border-radius: var(--radius-md);
       font-size: 0.95rem;
       font-weight: 600;
@@ -203,7 +209,7 @@
 
     /* Hero */
     .hero {
-      padding: 88px 0 64px;
+      padding: 80px 0 56px;
       text-align: center;
     }
 
@@ -218,16 +224,17 @@
       font-size: 0.8rem;
       font-family: var(--font-mono);
       color: var(--text-secondary);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(2.3rem, 5vw, 4.1rem);
+      font-size: clamp(1.85rem, 5.5vw, 3.8rem);
       font-weight: 700;
       line-height: 1.15;
       letter-spacing: -0.03em;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+      word-wrap: break-word;
     }
 
     .hero-title .highlight {
@@ -236,20 +243,27 @@
     }
 
     .hero-lead {
-      font-size: 1.18rem;
+      font-size: 1.15rem;
       color: var(--text-secondary);
-      max-width: 800px;
-      margin: 0 auto 36px;
+      max-width: 780px;
+      margin: 0 auto 32px;
       line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     .hero-tech-stack {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 16px;
       flex-wrap: wrap;
-      margin-top: 40px;
-      padding-top: 32px;
+      margin-top: 36px;
+      padding-top: 28px;
       border-top: 1px solid var(--border-subtle);
     }
 
@@ -272,7 +286,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 18px;
-      margin: 20px 0 88px;
+      margin: 20px 0 80px;
     }
 
     .barrier-card {
@@ -307,11 +321,11 @@
 
     /* Секция кейса */
     .showcase-stage {
-      margin: 0 0 88px;
+      margin: 0 0 80px;
       background: var(--bg-surface);
       border: 1px solid var(--border-medium);
       border-radius: var(--radius-xl);
-      padding: 48px 40px;
+      padding: 44px 36px;
       box-shadow: var(--shadow-ambient);
       position: relative;
     }
@@ -320,7 +334,7 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
       flex-wrap: wrap;
       gap: 16px;
     }
@@ -337,7 +351,7 @@
 
     .stage-title {
       font-family: var(--font-display);
-      font-size: 2rem;
+      font-size: 1.95rem;
       font-weight: 700;
       letter-spacing: -0.02em;
     }
@@ -345,7 +359,7 @@
     .stage-grid {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
-      gap: 40px;
+      gap: 36px;
       align-items: center;
     }
 
@@ -365,7 +379,8 @@
       overflow: hidden;
       position: relative;
       background: #000000;
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 16 / 10;
+      min-height: 320px;
     }
 
     .slider-track {
@@ -388,10 +403,11 @@
     .slide-item img {
       max-width: 100%;
       max-height: 100%;
-      width: 100%;
+      width: auto;
       height: 100%;
       object-fit: contain;
       display: block;
+      margin: 0 auto;
     }
 
     .slide-badge {
@@ -413,7 +429,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 10px 4px;
+      padding: 12px 6px 4px;
     }
 
     .carousel-dots {
@@ -437,8 +453,8 @@
     }
 
     .arrow-btn {
-      width: 32px;
-      height: 32px;
+      width: 42px;
+      height: 42px;
       border-radius: var(--radius-sm);
       background: var(--bg-surface-elevated);
       border: 1px solid var(--border-subtle);
@@ -452,7 +468,7 @@
     }
 
     .arrow-btn:active {
-      transform: scale(0.9);
+      transform: scale(0.92);
     }
 
     /* Телеметрия */
@@ -507,14 +523,14 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      margin-bottom: 88px;
+      margin-bottom: 80px;
     }
 
     .audience-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 32px 26px;
+      padding: 30px 24px;
       display: flex;
       flex-direction: column;
     }
@@ -530,16 +546,16 @@
 
     .audience-title {
       font-family: var(--font-display);
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .audience-desc {
       font-size: 0.92rem;
       color: var(--text-secondary);
       line-height: 1.55;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       flex-grow: 1;
     }
 
@@ -568,29 +584,30 @@
     .section-title-block {
       text-align: center;
       max-width: 720px;
-      margin: 0 auto 56px;
+      margin: 0 auto 52px;
     }
 
     .section-headline {
       font-family: var(--font-display);
-      font-size: 2.4rem;
+      font-size: 2.3rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       margin-bottom: 12px;
+      word-wrap: break-word;
     }
 
     .pipeline-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin-bottom: 48px;
+      gap: 18px;
+      margin-bottom: 44px;
     }
 
     .pipeline-step {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 28px 24px;
+      padding: 26px 22px;
       display: flex;
       flex-direction: column;
       transform: translateZ(0);
@@ -611,7 +628,7 @@
       font-size: 0.8rem;
       font-weight: 700;
       color: var(--accent-warm);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -626,9 +643,9 @@
 
     .step-name {
       font-family: var(--font-display);
-      font-size: 1.22rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       letter-spacing: -0.01em;
     }
 
@@ -636,7 +653,7 @@
       font-size: 0.9rem;
       color: var(--text-secondary);
       line-height: 1.5;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       flex-grow: 1;
     }
 
@@ -648,6 +665,7 @@
       border-radius: var(--radius-sm);
       color: #93C5FD;
       border: 1px solid rgba(255, 255, 255, 0.05);
+      align-self: flex-start;
     }
 
     /* Блок регламента формата */
@@ -655,14 +673,14 @@
       background: var(--bg-surface-elevated);
       border: 1px solid var(--border-medium);
       border-radius: var(--radius-lg);
-      padding: 32px;
-      margin-bottom: 88px;
+      padding: 30px;
+      margin-bottom: 80px;
     }
 
     .format-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+      gap: 20px;
     }
 
     .format-label {
@@ -676,7 +694,7 @@
 
     .format-title {
       font-family: var(--font-display);
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       margin-bottom: 6px;
     }
@@ -693,14 +711,14 @@
       grid-template-columns: 0.95fr 1.1fr 0.95fr;
       gap: 24px;
       align-items: stretch;
-      margin-bottom: 96px;
+      margin-bottom: 88px;
     }
 
     .tier-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-xl);
-      padding: 48px 32px 36px;
+      padding: 44px 30px 34px;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -733,12 +751,12 @@
     }
 
     .tier-header {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .tier-title {
       font-family: var(--font-display);
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       font-weight: 700;
       margin-bottom: 8px;
     }
@@ -747,12 +765,12 @@
       display: flex;
       align-items: baseline;
       gap: 6px;
-      margin: 14px 0 8px;
+      margin: 12px 0 8px;
     }
 
     .tier-price {
       font-family: var(--font-display);
-      font-size: 2.8rem;
+      font-size: 2.7rem;
       font-weight: 700;
       letter-spacing: -0.03em;
       line-height: 1;
@@ -768,7 +786,7 @@
 
     .tier-deliverables {
       list-style: none;
-      margin: 20px 0 24px;
+      margin: 18px 0 22px;
       flex-grow: 1;
       border-top: 1px solid var(--border-subtle);
       padding-top: 18px;
@@ -790,13 +808,12 @@
       font-weight: 700;
     }
 
-    /* Блок конкретного результата в тарифе */
     .tier-outcome {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
       padding: 14px 16px;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
     .tier-outcome-label {
@@ -827,7 +844,7 @@
 
     /* FAQ */
     .faq-section {
-      padding-bottom: 88px;
+      padding-bottom: 80px;
     }
 
     .faq-grid {
@@ -840,7 +857,7 @@
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 28px;
+      padding: 26px;
     }
 
     .faq-item h4 {
@@ -857,7 +874,7 @@
     }
 
     .site-footer {
-      padding: 48px 0 36px;
+      padding: 44px 0 32px;
       border-top: 1px solid var(--border-subtle);
       text-align: center;
       font-size: 0.85rem;
@@ -865,6 +882,9 @@
       font-family: var(--font-mono);
     }
 
+    /* ==========================================================================
+       Адаптивные медиа-запросы (Tablets & Mobile)
+       ========================================================================== */
     @media (max-width: 1024px) {
       .barriers-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -880,6 +900,9 @@
       }
       .tariffs-container {
         grid-template-columns: 1fr;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
       }
       .stage-grid {
         grid-template-columns: 1fr;
@@ -890,20 +913,84 @@
     }
 
     @media (max-width: 640px) {
+      .container {
+        padding: 0 16px;
+      }
+      .hero {
+        padding: 48px 0 32px;
+      }
+      .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+      .hero-buttons .btn {
+        width: 100%;
+      }
       .barriers-grid {
         grid-template-columns: 1fr;
-      }
-      .pipeline-grid {
-        grid-template-columns: 1fr;
-      }
-      .format-grid {
-        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 56px;
       }
       .showcase-stage {
         padding: 24px 16px;
+        border-radius: var(--radius-lg);
+        margin-bottom: 56px;
       }
-      .hero {
-        padding: 56px 0 36px;
+      .stage-title {
+        font-size: 1.65rem;
+      }
+      .slider-viewport {
+        aspect-ratio: 4 / 3;
+        min-height: 280px;
+      }
+      .pipeline-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .format-strip {
+        padding: 22px 18px;
+        margin-bottom: 56px;
+      }
+      .format-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .tier-card {
+        padding: 36px 20px 28px;
+      }
+      .tier-target-audience {
+        min-height: auto;
+      }
+      .section-headline {
+        font-size: 1.85rem;
+      }
+      .section-title-block {
+        margin-bottom: 36px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .brand-title {
+        font-size: 1.02rem;
+      }
+      .status-pill {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+      }
+      .status-pill .long-text {
+        display: none;
+      }
+      .status-pill .short-text {
+        display: inline;
+      }
+    }
+
+    @media (min-width: 441px) {
+      .status-pill .short-text {
+        display: none;
+      }
+      .status-pill .long-text {
+        display: inline;
       }
     }
   </style>
@@ -919,7 +1006,8 @@
       </a>
       <div class="status-pill">
         <span class="status-dot"></span>
-        <span>СТАРТ 8 ОКТЯБРЯ · 5 МЕСТ В ГРУППЕ</span>
+        <span class="long-text">СТАРТ 8 ОКТЯБРЯ · 5 МЕСТ В ГРУППЕ</span>
+        <span class="short-text">8 ОКТЯБРЯ · 5 МЕСТ</span>
       </div>
     </div>
   </nav>
@@ -942,7 +1030,7 @@
         Пошаговая система запуска виртуального персонажа с постоянным лицом. Вы научитесь генерировать вирусные ролики, привлекать подписчиков и получать оплаты на карту — даже если открываете нейросети в первый раз.
       </p>
 
-      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <div class="hero-buttons">
         <a href="#tariffs" class="btn btn-warm">Выбрать формат участия</a>
         <a href="#case" class="btn btn-outline">Посмотреть реальный пример</a>
       </div>
@@ -1032,7 +1120,7 @@
             <!-- Элементы управления -->
             <div class="carousel-controls">
               <button class="arrow-btn" id="prevSlide" aria-label="Назад">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
               </button>
               <div class="carousel-dots" id="carouselDots">
                 <span class="dot active" data-index="0"></span>
@@ -1040,7 +1128,7 @@
                 <span class="dot" data-index="2"></span>
               </div>
               <button class="arrow-btn" id="nextSlide" aria-label="Вперед">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
               </button>
             </div>
           </div>
@@ -1076,7 +1164,7 @@
     </section>
 
     <!-- Кому подходит практикум -->
-    <section class="container" style="margin-bottom: 88px;">
+    <section class="container" style="margin-bottom: 80px;">
       <div class="section-title-block">
         <span class="stage-tag">Для кого // Форматы применения</span>
         <h2 class="section-headline">Кому подойдет этот практикум</h2>
