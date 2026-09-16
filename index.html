@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Creator Lab — Практикум по созданию и монетизации ИИ-блогеров</title>
-  <meta name="description" content="Полный цикл запуска виртуального аватара: от создания стабильного персонажа до 100 000+ органических просмотров и автопродаж. Старт группы 8 октября.">
+  <title>AI Creator Lab — Практикум по запуску автономного ИИ-блогера</title>
+  <meta name="description" content="Создание цифрового актива на автопилоте: виртуальный персонаж со стабильным лицом, вирусный трафик и автоворонка оплат 24/7. Старт мини-группы 8 октября.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -223,9 +223,9 @@
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(2.5rem, 5.5vw, 4.4rem);
+      font-size: clamp(2.4rem, 5.2vw, 4.2rem);
       font-weight: 700;
-      line-height: 1.1;
+      line-height: 1.12;
       letter-spacing: -0.03em;
       margin-bottom: 24px;
     }
@@ -238,7 +238,7 @@
     .hero-lead {
       font-size: 1.2rem;
       color: var(--text-secondary);
-      max-width: 760px;
+      max-width: 820px;
       margin: 0 auto 36px;
       line-height: 1.6;
     }
@@ -267,9 +267,47 @@
       font-weight: 600;
     }
 
+    /* Секция 4 барьеров */
+    .barriers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin: 20px 0 88px;
+    }
+
+    .barrier-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .barrier-code {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent-warm);
+      margin-bottom: 12px;
+    }
+
+    .barrier-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .barrier-text {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
     /* Секция кейса */
     .showcase-stage {
-      margin: 48px 0 88px;
+      margin: 0 0 88px;
       background: var(--bg-surface);
       border: 1px solid var(--border-medium);
       border-radius: var(--radius-xl);
@@ -464,10 +502,72 @@
       line-height: 1.4;
     }
 
-    /* Пайплайн 4 уроков */
+    /* Секция сегментации (Кому нужен актив) */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 88px;
+    }
+
+    .audience-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 32px 26px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .audience-target {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-warm);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .audience-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .audience-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .audience-points {
+      list-style: none;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 16px;
+    }
+
+    .audience-points li {
+      font-size: 0.85rem;
+      color: #D1D5DB;
+      padding: 6px 0;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .audience-points li span {
+      color: var(--accent-emerald);
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+
+    /* Программа обучения */
     .section-title-block {
       text-align: center;
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto 56px;
     }
 
@@ -526,7 +626,7 @@
 
     .step-name {
       font-family: var(--font-display);
-      font-size: 1.25rem;
+      font-size: 1.22rem;
       font-weight: 700;
       margin-bottom: 12px;
       letter-spacing: -0.01em;
@@ -550,7 +650,7 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    /* Регламент формата */
+    /* Блок регламента формата */
     .format-strip {
       background: var(--bg-surface-elevated);
       border: 1px solid var(--border-medium);
@@ -734,6 +834,12 @@
     }
 
     @media (max-width: 1024px) {
+      .barriers-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .audience-grid {
+        grid-template-columns: 1fr;
+      }
       .pipeline-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -752,6 +858,9 @@
     }
 
     @media (max-width: 640px) {
+      .barriers-grid {
+        grid-template-columns: 1fr;
+      }
       .pipeline-grid {
         grid-template-columns: 1fr;
       }
@@ -784,21 +893,20 @@
   </nav>
 
   <main>
-    <!-- Экран 1: Hero -->
+    <!-- Экран 1: Hero с усиленным оффером -->
     <header class="hero container">
       <div class="hero-meta">
         <span>СТАРТ МИНИ-ГРУППЫ: 8 ОКТЯБРЯ</span>
         <span>·</span>
-        <span>БЕЗ СЪЕМОК И ПОКАЗА СЕБЯ</span>
+        <span>АВТОНОМНЫЙ ЦИФРОВОЙ АКТИВ</span>
       </div>
 
       <h1 class="hero-title">
-        Запуск и монетизация <br>
-        <span class="highlight">ИИ-блогера</span> на автопилоте
+        Создайте <span class="highlight">ИИ-блогера</span>, который приносит трафик и автопродажи 24/7
       </h1>
 
       <p class="hero-lead">
-        Пошаговое создание виртуального персонажа со стабильным лицом: от генерации первого вирусного сценария до органического трафика и прямых оплат на карту. Понятно даже тем, кто начинает с нуля.
+        Это не просто курс по нейросетям. Это практическая сборка автономного медиа-актива: от фиксации единого лица до органических просмотров и автоматических оплат на вашу карту без съемок и показа себя.
       </p>
 
       <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
@@ -810,41 +918,79 @@
         <div class="tech-pill">ENGINE: <span>OmniFlash / Kling</span></div>
         <div class="tech-pill">CONSISTENCY: <span>LoRA Face Lock</span></div>
         <div class="tech-pill">VOICE: <span>ElevenLabs Neural</span></div>
-        <div class="tech-pill">PLATFORM: <span>VK & Telegram</span></div>
+        <div class="tech-pill">CONVERSION: <span>24/7 Автоворонка</span></div>
       </div>
     </header>
+
+    <!-- Смысловой блок: 4 фундаментальных барьера -->
+    <section class="container">
+      <div class="barriers-grid">
+        <div class="barrier-card">
+          <div class="barrier-code">BARRIER // 01 · СТЕСНЕНИЕ КАМЕРЫ</div>
+          <h3 class="barrier-title">Свобода от лица</h3>
+          <p class="barrier-text">Технология Face Seed Lock создает виртуального человека, которого зритель воспринимает как живого автора. Вам не нужно быть в кадре.</p>
+        </div>
+
+        <div class="barrier-card">
+          <div class="barrier-code">BARRIER // 02 · ДЕФИЦИТ ВРЕМЕНИ</div>
+          <h3 class="barrier-title">Контент за 20 минут</h3>
+          <p class="barrier-text">Вместо 4 часов утомительных дублей, выставления света и сложного монтажа — быстрый генеративный пайплайн сценария, голоса и визуала.</p>
+        </div>
+
+        <div class="barrier-card">
+          <div class="barrier-code">BARRIER // 03 · ПОИСК ИДЕЙ</div>
+          <h3 class="barrier-title">Формула удержания 80%+</h3>
+          <p class="barrier-text">Готовые промпты и сценарные алгоритмы хуков. Ролики цепляют внимание с 1-й секунды и вирусятся органически без рекламных бюджетов.</p>
+        </div>
+
+        <div class="barrier-card">
+          <div class="barrier-code">BARRIER // 04 · МОНЕТИЗАЦИЯ</div>
+          <h3 class="barrier-title">Автоплатежи 24/7</h3>
+          <p class="barrier-text">Встроенная связка автоворонки. Персонаж продает цифровые продукты прямо внутри роликов, а оплаты поступают на карту непрерывно.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- Экран 2: Главный экспонат (Карусель скриншотов) -->
     <section class="container" id="case">
       <div class="showcase-stage">
         <div class="stage-header">
           <div>
-            <span class="stage-tag">Production Showcase // Case Data</span>
+            <span class="stage-tag">Production Showcase // Live Proof</span>
             <h2 class="stage-title">Кейс «Рецепты бабушки Марии»</h2>
           </div>
           <div class="status-pill" style="color: var(--text-secondary); border-color: var(--border-subtle);">
-            ВЫРУЧКА БЕЗ СЪЕМОК: 100% ПАССИВ
+            ВЫРУЧКА БЕЗ СЪЕМОК: 100% АВТОМАТИЗАЦИЯ
           </div>
         </div>
 
         <div class="stage-grid">
-          <!-- Студийный монитор со слайдером скриншотов -->
+          <!-- Монитор со слайдером скриншотов -->
           <div class="monitor-frame" id="caseSlider">
             <div class="slider-viewport">
               <div class="slider-track" id="sliderTrack">
-                <!-- Слайд 1: Вирусный ролик -->
+                <!-- Слайд 1: Вирусный ролик и статистика -->
                 <div class="slide-item">
-                  <img src="proof-stats.PNG" alt="Скриншот 1: 99 176 просмотров ролика" onerror="handleImgError(this, 'proof-stats.png')">
+                  <img 
+                    src="proof-stats.PNG" 
+                    alt="Скриншот 1: 99 176 просмотров ролика" 
+                    onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-stats.png';}">
                   <div class="slide-badge">01 / 03 · Охват: 99 176 просмотров</div>
                 </div>
-                <!-- Слайд 2: Персонаж -->
+                <!-- Слайд 2: Лицо ИИ-аватара -->
                 <div class="slide-item">
-                  <img src="proof-profile.PNG" alt="Скриншот 2: Лицо ИИ-аватара" onerror="handleImgError(this, 'proof-profile.png')">
+                  <img 
+                    src="proof-profile.PNG" 
+                    alt="Скриншот 2: Лицо ИИ-аватара" 
+                    onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-profile.png';}">
                   <div class="slide-badge">02 / 03 · Стабильное лицо персонажа</div>
                 </div>
-                <!-- Слайд 3: Оплата -->
+                <!-- Слайд 3: Автоматическая оплата -->
                 <div class="slide-item">
-                  <img src="proof-payment.PNG" alt="Скриншот 3: Поступление оплаты" onerror="handleImgError(this, 'proof-payment.png')">
+                  <img 
+                    src="proof-payment.PNG" 
+                    alt="Скриншот 3: Поступление оплаты" 
+                    onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-payment.png';}">
                   <div class="slide-badge">03 / 03 · Автоматическая оплата +490 ₽</div>
                 </div>
               </div>
@@ -873,7 +1019,7 @@
                 <span class="telemetry-label">Вирусный охват</span>
                 <span class="telemetry-val">99 176</span>
               </div>
-              <p class="telemetry-detail">Просмотров на одном видео про драники. Нулевые затраты на платную рекламу.</p>
+              <p class="telemetry-detail">Просмотров на одном 30-секундном ролике. Ноль рублей на платную рекламу — только алгоритмический хук.</p>
             </div>
 
             <div class="telemetry-card">
@@ -881,17 +1027,60 @@
                 <span class="telemetry-label">Автопродажи</span>
                 <span class="telemetry-val green">+490 ₽</span>
               </div>
-              <p class="telemetry-detail">Прямой входящий платеж за сборник рецептов в момент просмотра видео пользователем.</p>
+              <p class="telemetry-detail">Прямой входящий платеж за электронный сборник рецептов в момент просмотра видео пользователем.</p>
             </div>
 
             <div class="telemetry-card">
               <div class="telemetry-row">
-                <span class="telemetry-label">Скорость сборки</span>
+                <span class="telemetry-label">Скорость запуска</span>
                 <span class="telemetry-val">14 дней</span>
               </div>
-              <p class="telemetry-detail">От идеи персонажа до первых стабильных автоматических оплат цифрового продукта.</p>
+              <p class="telemetry-detail">От формулирования образа до первой стабильной серии автоматических оплат на банковскую карту.</p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Смысловой блок: Для кого этот актив -->
+    <section class="container" style="margin-bottom: 88px;">
+      <div class="section-title-block">
+        <span class="stage-tag">Audience Fit // Value Alignment</span>
+        <h2 class="section-headline">Кому и почему необходим этот актив</h2>
+        <p style="color: var(--text-secondary); font-size: 1.05rem;">
+          Переход от продажи своего личного времени к автономной системе, генерирующей результат:
+        </p>
+      </div>
+
+      <div class="audience-grid">
+        <div class="audience-card">
+          <span class="audience-target">МАРКЕТОЛОГАМ И ПРОДЮСЕРАМ</span>
+          <h3 class="audience-title">Контент-фабрика без капризов блогеров</h3>
+          <p class="audience-desc">ИИ-персонаж не выгорает, не требует гонораров и не уходит к конкурентам. Вы создаете лицо проекта один раз и генерируете десятки связок для арбитража и снижения цены лида (CPL).</p>
+          <ul class="audience-points">
+            <li><span>✓</span> Бесконечный трафик для тестов гипотез</li>
+            <li><span>✓</span> Возможность продавать создание аватара клиентам от 100 000 ₽</li>
+          </ul>
+        </div>
+
+        <div class="audience-card">
+          <span class="audience-target">КРЕАТОРАМ И ЭКСПЕРТАМ</span>
+          <h3 class="audience-title">Блог без камеры, грима и перфекционизма</h3>
+          <p class="audience-desc">Создайте виртуального двойника или тематического персонажа. Больше никаких сотен дублей из-за неудачной прически или усталости. Творчество трансформируется в предсказуемый бизнес.</p>
+          <ul class="audience-points">
+            <li><span>✓</span> 100% анонимность при стабильно высоком доверии</li>
+            <li><span>✓</span> Автопродажи цифровых гайдов без личных консультаций</li>
+          </ul>
+        </div>
+
+        <div class="audience-card">
+          <span class="audience-target">НОВИЧКАМ В НЕЙРОСЕТЯХ</span>
+          <h3 class="audience-title">Готовая система вместо хаоса сервисов</h3>
+          <p class="audience-desc">Четкий маршрут без каши в голове от десятков нейросетей. Понятная цепочка: «Сгенерируй лицо → Наложи голос → Запусти автоворонку». Окупаемость навыка на первых же продажах.</p>
+          <ul class="audience-points">
+            <li><span>✓</span> Пошаговый показ каждого клика в прямом эфире</li>
+            <li><span>✓</span> Поддержка куратора и проверка генераций в чате</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -969,7 +1158,7 @@
         <span class="stage-tag">Enrolment Options</span>
         <h2 class="section-headline">Форматы участия</h2>
         <p style="color: var(--text-secondary); font-size: 1.05rem;">
-          Количество мест в живой группе строго ограничено (до 5 человек) для сохранения качества ведения.
+          Количество мест в живой группе строго ограничено (до 5 человек) для сохранения качества ведения каждого участника.
         </p>
       </div>
 
@@ -1067,12 +1256,12 @@
 
         <div class="faq-item">
           <h4>Справлюсь ли я, если не разбираюсь в нейросетях?</h4>
-          <p>Да. Программа выстроена пошагово: преподаватель открывает экран через Яндекс Телемост, показывает каждый клик и объясняет логику понятным языком.</p>
+          <p>Да. Курс дает готовую связку вместо разрозненных инструментов: преподаватель открывает экран через Яндекс Телемост, показывает каждый клик и объясняет логику понятным языком.</p>
         </div>
 
         <div class="faq-item">
           <h4>Что продавать, если нет своего продукта?</h4>
-          <p>Мы подробно разберем варианты: продажу простых полезных файлов (рецепты, чек-листы, шпаргалки), партнерские ссылки или заработок на рекламе после набора просмотров.</p>
+          <p>На обучении мы разбираем готовые варианты: продажу простых полезных файлов (сборники рецептов, шпаргалки, гайды от 490 ₽), партнерские программы или монетизацию трафика через рекламу.</p>
         </div>
       </div>
     </section>
@@ -1082,7 +1271,7 @@
     <p>© 2026 AI CREATOR LAB · ARCHITECTURE & AUTOMATION · ALL RIGHTS RESERVED</p>
   </footer>
 
-  <!-- Скрипт карусели и проверки путей -->
+  <!-- Скрипт карусели и автопроверки путей -->
   <script>
     function handleImgError(img, fallbackName) {
       if (!img.dataset.triedFallback) {
