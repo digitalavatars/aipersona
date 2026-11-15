@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>AI Creator Lab — Практикум по созданию виртуального блогера</title>
-  <meta name="description" content="Пошаговый запуск ИИ-персонажа: генерация стабильного лица, вирусные короткие видео и автоматические оплаты на карту. Старт мини-группы 8 октября.">
+  <meta name="description" content="Бесплатный мастер-класс 17 ноября в 18:00. Пошаговый запуск ИИ-персонажа: стабильное лицо, вирусные короткие видео и автоматические оплаты на карту.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,7 +70,6 @@
         linear-gradient(to bottom, transparent, rgba(7, 8, 11, 0.85));
     }
 
-    /* Подложка в клеточку (четко видна на десктопе и на мобильных Retina-экранах) */
     body::before {
       content: "";
       position: fixed;
@@ -227,7 +226,7 @@
 
     /* Hero */
     .hero {
-      padding: 80px 0 56px;
+      padding: 80px 0 48px;
       text-align: center;
     }
 
@@ -237,11 +236,11 @@
       gap: 10px;
       padding: 6px 16px;
       border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-subtle);
+      background: rgba(255, 107, 53, 0.08);
+      border: 1px solid rgba(255, 107, 53, 0.25);
       font-size: 0.8rem;
       font-family: var(--font-mono);
-      color: var(--text-secondary);
+      color: var(--accent-warm);
       margin-bottom: 24px;
     }
 
@@ -299,12 +298,111 @@
       font-weight: 600;
     }
 
+    /* Блок бесплатного мастер-класса */
+    .masterclass-banner {
+      margin: 0 0 56px;
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, var(--bg-surface) 55%);
+      border: 1px solid rgba(255, 107, 53, 0.35);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+      gap: 32px;
+      align-items: center;
+      box-shadow: var(--shadow-warm-glow);
+    }
+
+    .mc-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-emerald);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 4px 12px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 14px;
+    }
+
+    .mc-title {
+      font-family: var(--font-display);
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .mc-desc {
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .mc-points {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 20px;
+    }
+
+    .mc-points li {
+      font-size: 0.88rem;
+      color: #E5E7EB;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .mc-points li span {
+      color: var(--accent-warm);
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+
+    .mc-action-box {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .mc-date-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .mc-date-val {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .mc-price-free {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-emerald);
+      margin-bottom: 20px;
+    }
+
+    .mc-action-box .btn {
+      width: 100%;
+    }
+
     /* 4 ключевых преимущества */
     .barriers-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 18px;
-      margin: 20px 0 80px;
+      margin: 0 0 80px;
     }
 
     .barrier-card {
@@ -337,11 +435,9 @@
       line-height: 1.5;
     }
 
-    /* ==========================================================================
-       Секция кейса (Исправлено переполнение для iPhone 12 Pro)
-       ========================================================================== */
+    /* Секция кейсов */
     .showcase-stage {
-      margin: 0 0 80px;
+      margin: 0 0 40px;
       background: var(--bg-surface);
       border: 1px solid var(--border-medium);
       border-radius: var(--radius-xl);
@@ -351,7 +447,11 @@
       width: 100%;
       max-width: 100%;
       box-sizing: border-box;
-      overflow: hidden; /* Защита от вылезания контента */
+      overflow: hidden;
+    }
+
+    .showcase-stage.last-case {
+      margin-bottom: 80px;
     }
 
     .stage-header {
@@ -383,7 +483,7 @@
 
     .stage-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); /* minmax(0, ...) предотвращает расширение сетки */
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
       gap: 36px;
       align-items: center;
       width: 100%;
@@ -421,13 +521,11 @@
 
     .slider-track {
       display: flex;
-      width: 300%;
       height: 100%;
       transition: transform 320ms var(--ease-out-snappy);
     }
 
     .slide-item {
-      width: 33.333333%;
       height: 100%;
       position: relative;
       display: flex;
@@ -452,7 +550,7 @@
       position: absolute;
       bottom: 12px;
       left: 12px;
-      max-width: calc(100% - 24px); /* Не дает плашке вылезать за пределы картинки */
+      max-width: calc(100% - 24px);
       background: rgba(7, 8, 11, 0.88);
       backdrop-filter: blur(8px);
       padding: 5px 12px;
@@ -927,10 +1025,12 @@
       font-family: var(--font-mono);
     }
 
-    /* ==========================================================================
-       Адаптивные стили (Планшеты и Смартфоны, включая iPhone 12 Pro)
-       ========================================================================== */
+    /* Адаптивные стили */
     @media (max-width: 1024px) {
+      .masterclass-banner {
+        grid-template-columns: 1fr;
+        padding: 28px 24px;
+      }
       .barriers-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -950,7 +1050,7 @@
         margin-right: auto;
       }
       .stage-grid {
-        grid-template-columns: minmax(0, 1fr); /* Защита от расширения */
+        grid-template-columns: minmax(0, 1fr);
       }
       .faq-grid {
         grid-template-columns: 1fr;
@@ -962,7 +1062,7 @@
         padding: 0 16px;
       }
       .hero {
-        padding: 48px 0 32px;
+        padding: 44px 0 28px;
       }
       .hero-buttons {
         flex-direction: column;
@@ -970,6 +1070,18 @@
       }
       .hero-buttons .btn {
         width: 100%;
+      }
+      .masterclass-banner {
+        padding: 22px 16px;
+        border-radius: var(--radius-lg);
+        margin-bottom: 40px;
+        gap: 20px;
+      }
+      .mc-title {
+        font-size: 1.5rem;
+      }
+      .mc-points {
+        grid-template-columns: 1fr;
       }
       .barriers-grid {
         grid-template-columns: 1fr;
@@ -979,6 +1091,9 @@
       .showcase-stage {
         padding: 22px 14px;
         border-radius: var(--radius-lg);
+        margin-bottom: 24px;
+      }
+      .showcase-stage.last-case {
         margin-bottom: 56px;
       }
       .stage-header {
@@ -1064,8 +1179,8 @@
       </a>
       <div class="status-pill">
         <span class="status-dot"></span>
-        <span class="long-text">СТАРТ 8 ОКТЯБРЯ · 5 МЕСТ В ГРУППЕ</span>
-        <span class="short-text">8 ОКТЯБРЯ · 5 МЕСТ</span>
+        <span class="long-text">БЕСПЛАТНЫЙ ЭФИР · 17 НОЯБРЯ В 18:00</span>
+        <span class="short-text">17 НОЯБРЯ · 18:00</span>
       </div>
     </div>
   </nav>
@@ -1074,9 +1189,9 @@
     <!-- Экран 1: Hero -->
     <header class="hero container">
       <div class="hero-meta">
-        <span>СТАРТ МИНИ-ГРУППЫ: 8 ОКТЯБРЯ</span>
+        <span>БЕСПЛАТНЫЙ МАСТЕР-КЛАСС</span>
         <span>·</span>
-        <span>ОНЛАЙН-ПРАКТИКУМ</span>
+        <span>17 НОЯБРЯ В 18:00 МСК</span>
       </div>
 
       <h1 class="hero-title">
@@ -1089,8 +1204,8 @@
       </p>
 
       <div class="hero-buttons">
-        <a href="#tariffs" class="btn btn-warm">Выбрать формат участия</a>
-        <a href="#case" class="btn btn-outline">Посмотреть реальный пример</a>
+        <a href="https://vk.me/veronika_production" target="_blank" rel="noopener noreferrer" class="btn btn-warm">Записаться на бесплатный эфир</a>
+        <a href="#case" class="btn btn-outline">Посмотреть реальные кейсы</a>
       </div>
 
       <div class="hero-tech-stack">
@@ -1100,6 +1215,34 @@
         <div class="tech-pill">МОНЕТИЗАЦИЯ: <span>Оплаты сразу на карту</span></div>
       </div>
     </header>
+
+    <!-- Блок бесплатного мастер-класса -->
+    <section class="container" id="masterclass">
+      <div class="masterclass-banner">
+        <div>
+          <span class="mc-badge">ОТКРЫТЫЙ ПРЯМОЙ ЭФИР</span>
+          <h2 class="mc-title">Бесплатный мастер-класс по запуску ИИ-блогера</h2>
+          <p class="mc-desc">
+            В прямом эфире покажем всю кухню создания виртуальных персонажей на реальных примерах. Вы увидите, как собрать блог, который набирает десятки тысяч просмотров и приносит деньги, даже если вы никогда не работали с нейросетями.
+          </p>
+          <ul class="mc-points">
+            <li><span>01.</span> Выбор прибыльной ниши для персонажа</li>
+            <li><span>02.</span> Секрет одного и того же лица во всех видео</li>
+            <li><span>03.</span> Разбор роликов на 80 000+ и 99 000+ просмотров</li>
+            <li><span>04.</span> Как подключить прием оплат на свою карту</li>
+          </ul>
+        </div>
+
+        <div class="mc-action-box">
+          <div class="mc-date-label">Когда встречаемся</div>
+          <div class="mc-date-val">17 ноября в 18:00</div>
+          <div class="mc-price-free">Участие бесплатное · Прямой эфир</div>
+          <a href="https://vk.me/veronika_production" target="_blank" rel="noopener noreferrer" class="btn btn-warm">
+            Занять место на эфире
+          </a>
+        </div>
+      </div>
+    </section>
 
     <!-- 4 ключевых преимущества -->
     <section class="container">
@@ -1130,12 +1273,12 @@
       </div>
     </section>
 
-    <!-- Экран 2: Разбор кейса (Адаптировано под iPhone 12 Pro) -->
+    <!-- Кейс 1: Бабушка Мария -->
     <section class="container" id="case">
       <div class="showcase-stage">
         <div class="stage-header">
           <div>
-            <span class="stage-tag">Реальный результат // Разбор кейса</span>
+            <span class="stage-tag">Реальный результат // Кейс №1</span>
             <h2 class="stage-title">Проект «Рецепты бабушки Марии»</h2>
           </div>
           <div class="status-pill" style="color: var(--text-secondary); border-color: var(--border-subtle);">
@@ -1144,28 +1287,24 @@
         </div>
 
         <div class="stage-grid">
-          <!-- Монитор со слайдером скриншотов -->
-          <div class="monitor-frame" id="caseSlider">
+          <div class="monitor-frame case-slider">
             <div class="slider-viewport">
-              <div class="slider-track" id="sliderTrack">
-                <!-- Слайд 1: Вирусный ролик и статистика -->
-                <div class="slide-item">
+              <div class="slider-track" style="width: 300%;">
+                <div class="slide-item" style="width: 33.333333%;">
                   <img 
                     src="proof-stats.PNG" 
                     alt="Скриншот 1: 99 176 просмотров ролика" 
                     onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-stats.png';}">
                   <div class="slide-badge">01 / 03 · 99 176 просмотров на одном ролике</div>
                 </div>
-                <!-- Слайд 2: Лицо персонажа -->
-                <div class="slide-item">
+                <div class="slide-item" style="width: 33.333333%;">
                   <img 
                     src="proof-profile.PNG" 
                     alt="Скриншот 2: Лицо персонажа" 
                     onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-profile.png';}">
                   <div class="slide-badge">02 / 03 · Персонаж с живой мимикой</div>
                 </div>
-                <!-- Слайд 3: Автоматическая оплата -->
-                <div class="slide-item">
+                <div class="slide-item" style="width: 33.333333%;">
                   <img 
                     src="proof-payment.PNG" 
                     alt="Скриншот 3: Поступление оплаты" 
@@ -1175,23 +1314,21 @@
               </div>
             </div>
 
-            <!-- Элементы управления -->
             <div class="carousel-controls">
-              <button class="arrow-btn" id="prevSlide" aria-label="Назад">
+              <button class="arrow-btn prev-btn" aria-label="Назад">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
               </button>
-              <div class="carousel-dots" id="carouselDots">
+              <div class="carousel-dots">
                 <span class="dot active" data-index="0"></span>
                 <span class="dot" data-index="1"></span>
                 <span class="dot" data-index="2"></span>
               </div>
-              <button class="arrow-btn" id="nextSlide" aria-label="Вперед">
+              <button class="arrow-btn next-btn" aria-label="Вперед">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
               </button>
             </div>
           </div>
 
-          <!-- Стек показателей -->
           <div class="telemetry-stack">
             <div class="telemetry-card">
               <div class="telemetry-row">
@@ -1215,6 +1352,81 @@
                 <span class="telemetry-val">14 дней</span>
               </div>
               <p class="telemetry-detail">От выбора идеи и генерации персонажа до регулярных входящих оплат от зрителей.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Кейс 2: ИИ-астролог -->
+      <div class="showcase-stage last-case">
+        <div class="stage-header">
+          <div>
+            <span class="stage-tag">Реальный результат // Кейс №2</span>
+            <h2 class="stage-title">Проект «ИИ-эксперт: Астрология»</h2>
+          </div>
+          <div class="status-pill" style="color: var(--text-secondary); border-color: var(--border-subtle);">
+            ЭКСПЕРТНАЯ НИША · ОРГАНИКА
+          </div>
+        </div>
+
+        <div class="stage-grid">
+          <div class="monitor-frame case-slider">
+            <div class="slider-viewport">
+              <div class="slider-track" style="width: 200%;">
+                <div class="slide-item" style="width: 50%;">
+                  <img 
+                    src="case2-stats.jpg" 
+                    alt="Скриншот статистики: 80 856 просмотров ролика" 
+                    onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='IMG_4053.jpg';}">
+                  <div class="slide-badge">01 / 02 · 80 856 просмотров и 293 подписчика</div>
+                </div>
+                <div class="slide-item" style="width: 50%;">
+                  <img 
+                    src="case2-profile.jpg" 
+                    alt="Портрет ИИ-астролога" 
+                    onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='Mj from Syntx.ai (4).jpg';}">
+                  <div class="slide-badge">02 / 02 · Фотореалистичный образ эксперта</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-controls">
+              <button class="arrow-btn prev-btn" aria-label="Назад">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="carousel-dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+              </div>
+              <button class="arrow-btn next-btn" aria-label="Вперед">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="telemetry-stack">
+            <div class="telemetry-card">
+              <div class="telemetry-row">
+                <span class="telemetry-label">Просмотры одного видео</span>
+                <span class="telemetry-val">80 856</span>
+              </div>
+              <p class="telemetry-detail">Охват ролика про самый везучий знак зодиака в 2027 году. Среднее время просмотра — 15 секунд.</p>
+            </div>
+
+            <div class="telemetry-card">
+              <div class="telemetry-row">
+                <span class="telemetry-label">Новые подписчики</span>
+                <span class="telemetry-val green">+293</span>
+              </div>
+              <p class="telemetry-detail">Пришло целевых подписчиков с одного короткого видео без вложений в рекламу.</p>
+            </div>
+
+            <div class="telemetry-card">
+              <div class="telemetry-row">
+                <span class="telemetry-label">Реакции аудитории</span>
+                <span class="telemetry-val">501 / 311</span>
+              </div>
+              <p class="telemetry-detail">501 репост, 311 сохранений и 2 100 лайков — зрители доверяют персонажу и делятся видео.</p>
             </div>
           </div>
         </div>
@@ -1375,7 +1587,7 @@
 
         <!-- Тариф 2 (Основной) -->
         <div class="tier-card primary-tier">
-          <div class="tier-tag">СТАРТ 8 ОКТЯБРЯ · 5 МЕСТ</div>
+          <div class="tier-tag">МИНИ-ГРУППА · ДО 5 МЕСТ</div>
           <div class="tier-header">
             <h3 class="tier-title">Мини-группа с наставником</h3>
             <div class="tier-price-row">
@@ -1449,13 +1661,13 @@
 
       <div class="faq-grid">
         <div class="faq-item">
-          <h4>Что делать, если я пропущу онлайн-встречу?</h4>
-          <p>Запись созвона появляется в закрытом чате сразу после эфира. Доступ ко всем урокам сохраняется на 6 месяцев. Вопросы можно задать наставнику прямо в чате Telegram в любое удобное время.</p>
+          <h4>Что будет на бесплатном мастер-классе 17 ноября?</h4>
+          <p>В 18:00 на прямом эфире мы разберем рабочие кейсы, покажем, как за 20 минут собирается видео с ИИ-персонажем, и ответим на все ваши вопросы перед стартом потока.</p>
         </div>
 
         <div class="faq-item">
-          <h4>Как согласуется время для эфиров?</h4>
-          <p>Так как в группе всего 5 человек, перед стартом 8 октября мы проводим короткий опрос в Telegram и выбираем день и время, комфортные для каждого участника.</p>
+          <h4>Что делать, если я пропущу онлайн-встречу курса?</h4>
+          <p>Запись созвона появляется в закрытом чате сразу после эфира. Доступ ко всем урокам сохраняется на 6 месяцев. Вопросы можно задать наставнику прямо в чате Telegram в любое удобное время.</p>
         </div>
 
         <div class="faq-item">
@@ -1472,34 +1684,27 @@
   </main>
 
   <footer class="site-footer container">
-    <p>© 2026 AI CREATOR LAB · ПРАКТИКУМ ПО СОЗДАНИЮ ИИ-ПЕРСОНАЖЕЙ · СТАРТ 8 ОКТЯБРЯ</p>
+    <p>© 2026 AI CREATOR LAB · БЕСПЛАТНЫЙ ЭФИР 17 НОЯБРЯ В 18:00</p>
   </footer>
 
-  <!-- Скрипт карусели и автопроверки путей -->
+  <!-- Скрипт всех каруселей на странице -->
   <script>
-    function handleImgError(img, fallbackName) {
-      if (!img.dataset.retry) {
-        img.dataset.retry = "1";
-        img.src = fallbackName;
-      }
-    }
-
-    (function initSlider() {
-      const track = document.getElementById('sliderTrack');
-      const dots = document.querySelectorAll('#carouselDots .dot');
-      const prevBtn = document.getElementById('prevSlide');
-      const nextBtn = document.getElementById('nextSlide');
-      const sliderContainer = document.getElementById('caseSlider');
+    document.querySelectorAll('.case-slider').forEach((sliderContainer) => {
+      const track = sliderContainer.querySelector('.slider-track');
+      const dots = sliderContainer.querySelectorAll('.dot');
+      const prevBtn = sliderContainer.querySelector('.prev-btn');
+      const nextBtn = sliderContainer.querySelector('.next-btn');
 
       if (!track || !dots.length) return;
 
       let currentIndex = 0;
       const totalSlides = dots.length;
+      const stepPercent = 100 / totalSlides;
       let autoPlayTimer = null;
 
       function goToSlide(index) {
         currentIndex = (index + totalSlides) % totalSlides;
-        track.style.transform = `translateX(-${currentIndex * 33.333333}%)`;
+        track.style.transform = `translateX(-${currentIndex * stepPercent}%)`;
         dots.forEach((dot, idx) => {
           dot.classList.toggle('active', idx === currentIndex);
         });
@@ -1533,10 +1738,8 @@
         });
       });
 
-      if (sliderContainer) {
-        sliderContainer.addEventListener('mouseenter', stopAutoPlay);
-        sliderContainer.addEventListener('mouseleave', startAutoPlay);
-      }
+      sliderContainer.addEventListener('mouseenter', stopAutoPlay);
+      sliderContainer.addEventListener('mouseleave', startAutoPlay);
 
       let touchStartX = 0;
       let touchEndX = 0;
@@ -1557,7 +1760,7 @@
       }, { passive: true });
 
       startAutoPlay();
-    })();
+    });
   </script>
 
 </body>
