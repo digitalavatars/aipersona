@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>AI Creator Lab — Бесплатный мастер-класс 17 ноября в 18:00</title>
+  <meta name="description" content="Открытый прямой эфир 17 ноября в 18:00 МСК. Как запустить ИИ-блогера с постоянным лицом, набирать десятки тысяч просмотров и получать заявки.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-display: 'Space Grotesk', -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --ease-out-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-feedback: 140ms;
+      --duration-ui: 220ms;
+
+      --bg-root: #07080B;
+      --bg-surface: #0E1118;
+      --bg-surface-elevated: #141A24;
+      --bg-surface-glass: rgba(14, 17, 24, 0.85);
+
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --border-medium: rgba(255, 255, 255, 0.14);
+
+      /* Зелено-голубая (бирюзовая) палитра */
+      --accent-teal: #14B8A6;
+      --accent-cyan: #2DD4BF;
+      --accent-teal-soft: rgba(20, 184, 166, 0.12);
+      --accent-emerald: #10B981;
+
+      --text-primary: #F3F4F6;
+      --text-secondary: #9CA3AF;
+      --text-muted: #6B7280;
+
+      --radius-sm: 6px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 32px;
+
+      --shadow-ambient: 0 30px 60px -15px rgba(0, 0, 0, 0.85);
+      --shadow-teal-glow: 0 0 50px -10px rgba(20, 184, 166, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      scroll-behavior: smooth;
+      background-color: var(--bg-root);
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-root);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(20, 184, 166, 0.12) 0%, transparent 50%),
+        linear-gradient(to bottom, transparent, rgba(7, 8, 11, 0.85));
+    }
+
+    /* Подложка в клеточку */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 36px 36px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+      pointer-events: none;
+      z-index: 0;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+
+    @media (max-width: 640px) {
+      body::before {
+        background-size: 24px 24px;
+        background-image:
+          linear-gradient(to right, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+      }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+      box-sizing: border-box;
+    }
+
+    /* Навигация */
+    .top-nav {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--bg-surface-glass);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      width: 10px;
+      height: 10px;
+      background: var(--accent-teal);
+      border-radius: 2px;
+      box-shadow: 0 0 12px var(--accent-teal);
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(20, 184, 166, 0.1);
+      border: 1px solid rgba(20, 184, 166, 0.3);
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-cyan);
+      flex-shrink: 0;
+    }
+
+    /* Кнопки */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 28px;
+      min-height: 48px;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transform: translateZ(0);
+      transition: transform var(--duration-feedback) var(--ease-out-snappy),
+                  box-shadow var(--duration-ui) var(--ease-out-snappy),
+                  background-color var(--duration-ui) var(--ease-out-snappy);
+    }
+
+    .btn:active {
+      transform: scale(0.97) !important;
+    }
+
+    .btn-teal {
+      background: var(--accent-teal);
+      color: #041311;
+      font-weight: 700;
+      box-shadow: 0 4px 20px -2px rgba(20, 184, 166, 0.4);
+    }
+
+    .btn-outline {
+      background: var(--bg-surface-elevated);
+      color: var(--text-primary);
+      border-color: var(--border-medium);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .btn-teal:hover {
+        background: var(--accent-cyan);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 26px -2px rgba(45, 212, 191, 0.5);
+      }
+      .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 56px;
+      text-align: center;
+    }
+
+    .hero-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(20, 184, 166, 0.08);
+      border: 1px solid rgba(20, 184, 166, 0.25);
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.85rem, 5.5vw, 3.7rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      word-wrap: break-word;
+    }
+
+    .hero-title .highlight {
+      color: var(--accent-cyan);
+      display: inline-block;
+    }
+
+    .hero-lead {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 780px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-strip {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .meta-pill {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-pill span {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* Заголовки секций */
+    .section-title-block {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 48px;
+    }
+
+    .stage-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-cyan);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .section-headline {
+      font-family: var(--font-display);
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      word-wrap: break-word;
+    }
+
+    /* Программа эфира (4 карточки) */
+    .agenda-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin: 0 0 80px;
+    }
+
+    .agenda-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--duration-ui) var(--ease-out-snappy),
+                  border-color var(--duration-ui) var(--ease-out-snappy);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .agenda-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(20, 184, 166, 0.35);
+        background: var(--bg-surface-elevated);
+      }
+    }
+
+    .agenda-code {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent-cyan);
+      margin-bottom: 12px;
+    }
+
+    .agenda-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .agenda-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Кейсы ИИ-персонажей */
+    .showcase-stage {
+      margin: 0 0 40px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-xl);
+      padding: 44px 36px;
+      box-shadow: var(--shadow-ambient);
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .showcase-stage.last-case {
+      margin-bottom: 80px;
+    }
+
+    .stage-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .stage-title {
+      font-family: var(--font-display);
+      font-size: 1.95rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .stage-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: 36px;
+      align-items: center;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    /* Монитор со слайдером и вживлением фото в палитру */
+    .monitor-frame {
+      border-radius: var(--radius-lg);
+      background: #050709;
+      padding: 8px;
+      border: 1px solid rgba(20, 184, 166, 0.28);
+      box-shadow: var(--shadow-teal-glow);
+      position: relative;
+      user-select: none;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .slider-viewport {
+      border-radius: calc(var(--radius-lg) - 6px);
+      overflow: hidden;
+      position: relative;
+      background: #050709;
+      aspect-ratio: 16 / 10;
+      min-height: 320px;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .slider-track {
+      display: flex;
+      height: 100%;
+      transition: transform 320ms var(--ease-out-snappy);
+    }
+
+    .slide-item {
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 50%, rgba(20, 184, 166, 0.08) 0%, #050709 75%);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .slide-item img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+      filter: contrast(1.04) saturate(0.95);
+    }
+
+    /* Легкая виньетка по краям изображений в слайдере */
+    .slide-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(7, 8, 11, 0.65) 0%, transparent 25%);
+      pointer-events: none;
+    }
+
+    .slide-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      z-index: 2;
+      max-width: calc(100% - 24px);
+      background: rgba(7, 8, 11, 0.88);
+      backdrop-filter: blur(8px);
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.74rem;
+      font-family: var(--font-mono);
+      color: #F3F4F6;
+      border: 1px solid rgba(20, 184, 166, 0.25);
+      pointer-events: none;
+      box-sizing: border-box;
+      line-height: 1.35;
+    }
+
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 6px 4px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: width 240ms var(--ease-out-snappy), background-color 240ms ease-out;
+    }
+
+    .dot.active {
+      width: 24px;
+      background: var(--accent-teal);
+    }
+
+    .arrow-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform var(--duration-feedback) var(--ease-out-snappy),
+                  background-color var(--duration-ui) var(--ease-out-snappy);
+    }
+
+    .arrow-btn:active {
+      transform: scale(0.92);
+    }
+
+    /* Телеметрия */
+    .telemetry-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .telemetry-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .telemetry-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .telemetry-val {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .telemetry-val.teal {
+      color: var(--accent-cyan);
+    }
+
+    .telemetry-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .telemetry-detail {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* ==========================================================================
+       Раздел «Обо мне» с бесшовной интеграцией портрета в палитру сайта
+       ========================================================================== */
+    .about-stage {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-xl);
+      padding: 44px 36px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-ambient);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    /* Студийный портрет в духе примера с бабушкой */
+    .author-visual {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 42%, rgba(20, 184, 166, 0.24) 0%, #07080B 74%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    /* Мягкое свечение позади портрета */
+    .author-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 35%, rgba(45, 212, 191, 0.28), transparent 65%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Встроенная цветокоррекция фото + плавное растворение краев в фон */
+    .author-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      position: relative;
+      z-index: 2;
+      filter: contrast(1.07) saturate(0.86) brightness(0.96);
+      -webkit-mask-image: radial-gradient(ellipse 86% 88% at 50% 46%, #000 58%, transparent 100%);
+      mask-image: radial-gradient(ellipse 86% 88% at 50% 46%, #000 58%, transparent 100%);
+    }
+
+    /* Бирюзовый контровой оттенок поверх фото для единства со стилем */
+    .author-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.22) 0%, transparent 48%, rgba(7, 8, 11, 0.82) 100%);
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+
+    .author-badge {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      right: 14px;
+      z-index: 4;
+      background: rgba(7, 8, 11, 0.82);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(20, 184, 166, 0.35);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent-cyan);
+      text-align: center;
+    }
+
+    .about-content h2 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .about-content p {
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .about-highlights {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .about-stat {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    .about-stat-val {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .about-stat-label {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.35;
+    }
+
+    /* Кейсы из других ниш (4 карточки) */
+    .niche-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .niche-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color var(--duration-ui) var(--ease-out-snappy);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .niche-card:hover {
+        border-color: rgba(20, 184, 166, 0.35);
+      }
+    }
+
+    /* Встроенная рамка для опционального скриншота кейса в цветах сайта */
+    .niche-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 18px;
+      background: #050709;
+      border: 1px solid rgba(20, 184, 166, 0.22);
+    }
+
+    .niche-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.06) saturate(0.82) brightness(0.92);
+    }
+
+    .niche-thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(20, 184, 166, 0.14) 0%, rgba(7, 8, 11, 0.72) 100%);
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+
+    .niche-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .niche-brand {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .niche-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent-cyan);
+      background: rgba(20, 184, 166, 0.1);
+      padding: 3px 9px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+    }
+
+    .niche-metric {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin-bottom: 8px;
+    }
+
+    .niche-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .niche-footnote {
+      text-align: center;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-bottom: 80px;
+      padding: 16px 20px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+    }
+
+    /* Финальный CTA блок */
+    .final-cta-box {
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.12) 0%, var(--bg-surface) 60%);
+      border: 1px solid rgba(20, 184, 166, 0.35);
+      border-radius: var(--radius-xl);
+      padding: 48px 36px;
+      text-align: center;
+      margin-bottom: 80px;
+      box-shadow: var(--shadow-teal-glow);
+    }
+
+    .final-cta-box h2 {
+      font-family: var(--font-display);
+      font-size: 2.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .final-cta-box p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 620px;
+      margin: 0 auto 28px;
+    }
+
+    .site-footer {
+      padding: 44px 0 32px;
+      border-top: 1px solid var(--border-subtle);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* Адаптив под планшеты и смартфоны */
+    @media (max-width: 1024px) {
+      .agenda-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stage-grid, .about-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .niche-cases-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 16px;
+      }
+      .hero {
+        padding: 44px 0 32px;
+      }
+      .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+      .hero-buttons .btn {
+        width: 100%;
+      }
+      .agenda-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 56px;
+      }
+      .showcase-stage, .about-stage {
+        padding: 22px 14px;
+        border-radius: var(--radius-lg);
+        margin-bottom: 24px;
+      }
+      .showcase-stage.last-case {
+        margin-bottom: 56px;
+      }
+      .stage-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .stage-title, .about-content h2 {
+        font-size: 1.55rem;
+      }
+      .slider-viewport {
+        aspect-ratio: 4 / 3;
+        min-height: 270px;
+      }
+      .slide-badge {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+        bottom: 8px;
+        left: 8px;
+        max-width: calc(100% - 16px);
+      }
+      .about-highlights {
+        grid-template-columns: 1fr;
+      }
+      .section-headline {
+        font-size: 1.85rem;
+      }
+      .section-title-block {
+        margin-bottom: 32px;
+      }
+      .final-cta-box {
+        padding: 32px 20px;
+        border-radius: var(--radius-lg);
+      }
+      .final-cta-box h2 {
+        font-size: 1.65rem;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .brand-title {
+        font-size: 1.02rem;
+      }
+      .status-pill {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+      }
+      .status-pill .long-text {
+        display: none;
+      }
+      .status-pill .short-text {
+        display: inline;
+      }
+    }
+
+    @media (min-width: 441px) {
+      .status-pill .short-text {
+        display: none;
+      }
+      .status-pill .long-text {
+        display: inline;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Навигация -->
+  <nav class="top-nav">
+    <div class="container nav-content">
+      <a href="#" class="brand">
+        <div class="brand-mark"></div>
+        <div class="brand-title">AI CREATOR LAB</div>
+      </a>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span class="long-text">БЕСПЛАТНЫЙ ЭФИР · 17 НОЯБРЯ В 18:00</span>
+        <span class="short-text">17 НОЯБРЯ · 18:00</span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Экран 1: Hero -->
+    <header class="hero container">
+      <div class="hero-meta">
+        <span>ОТКРЫТЫЙ МАСТЕР-КЛАСС</span>
+        <span>·</span>
+        <span>17 НОЯБРЯ В 18:00 МСК</span>
+      </div>
+
+      <h1 class="hero-title">
+        Как запустить <span class="highlight">ИИ-блогера</span>,<br>
+        который приводит подписчиков и заявки
+      </h1>
+
+      <p class="hero-lead">
+        На прямом эфире покажу, как создать виртуального персонажа с постоянным лицом и настроить регулярный выход роликов — понятно даже тем, кто открывает нейросети впервые.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="https://vk.me/veronika_production" target="_blank" rel="noopener noreferrer" class="btn btn-teal">Записаться на бесплатный эфир</a>
+        <a href="#program" class="btn btn-outline">Что будет на эфире</a>
+      </div>
+
+      <div class="hero-meta-strip">
+        <div class="meta-pill">ФОРМАТ: <span>Живой прямой эфир</span></div>
+        <div class="meta-pill">УЧАСТИЕ: <span>Бесплатно</span></div>
+        <div class="meta-pill">ДАТА: <span>17 ноября, 18:00 МСК</span></div>
+        <div class="meta-pill">УРОВЕНЬ: <span>Подходит с нуля</span></div>
+      </div>
+    </header>
+
+    <!-- Программа эфира -->
+    <section class="container" id="program">
+      <div class="section-title-block">
+        <span class="stage-tag">Программа встречи</span>
+        <h2 class="section-headline">Что разберем на мастер-классе</h2>
+      </div>
+
+      <div class="agenda-grid">
+        <div class="agenda-card">
+          <div class="agenda-code">01 · ВЫБОР ТЕМЫ</div>
+          <h3 class="agenda-title">Какие ниши набирают просмотры</h3>
+          <p class="agenda-text">На реальных примерах разберем, почему одни ролики видят сотни человек, а другие выходят на десятки тысяч охватов.</p>
+        </div>
+
+        <div class="agenda-card">
+          <div class="agenda-code">02 · ВНЕШНОСТЬ ГЕРОЯ</div>
+          <h3 class="agenda-title">Постоянное лицо в каждом видео</h3>
+          <p class="agenda-text">Покажем принцип генерации, благодаря которому лицо персонажа не меняется от кадра к кадру, а зрители его запоминают.</p>
+        </div>
+
+        <div class="agenda-card">
+          <div class="agenda-code">03 · СБОРКА РОЛИКА</div>
+          <h3 class="agenda-title">Готовое видео за 20 минут</h3>
+          <p class="agenda-text">Пройдем весь путь от идеи короткого сценария до реалистичной озвучки и живой мимики персонажа на экране.</p>
+        </div>
+
+        <div class="agenda-card">
+          <div class="agenda-code">04 · ПЕРВЫЕ ДЕНЬГИ</div>
+          <h3 class="agenda-title">Как блог начинает окупаться</h3>
+          <p class="agenda-text">Разберем простые способы монетизации через полезные файлы, услуги или рекламу и прием оплат сразу на карту.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Кейсы ИИ-персонажей -->
+    <section class="container" id="cases">
+      <div class="section-title-block">
+        <span class="stage-tag">Практика // ИИ-персонажи</span>
+        <h2 class="section-headline">Кейсы, которые разберем на эфире</h2>
+      </div>
+
+      <!-- Кейс 1: Бабушка Мария -->
+      <div class="showcase-stage">
+        <div class="stage-header">
+          <div>
+            <span class="stage-tag">Кейс №1 // Кулинария</span>
+            <h2 class="stage-title">Проект «Рецепты бабушки Марии»</h2>
+          </div>
+          <div class="status-pill">АВТОМАТИЧЕСКИЕ ПРОДАЖИ</div>
+        </div>
+
+        <div class="stage-grid">
+          <div class="monitor-frame case-slider">
+            <div class="slider-viewport">
+              <div class="slider-track" style="width: 300%;">
+                <div class="slide-item" style="width: 33.333333%;">
+                  <img src="proof-stats.PNG" alt="99 176 просмотров ролика" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-stats.png';}">
+                  <div class="slide-badge">01 / 03 · 99 176 просмотров на одном ролике</div>
+                </div>
+                <div class="slide-item" style="width: 33.333333%;">
+                  <img src="proof-profile.PNG" alt="Лицо персонажа" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-profile.png';}">
+                  <div class="slide-badge">02 / 03 · Персонаж с живой мимикой</div>
+                </div>
+                <div class="slide-item" style="width: 33.333333%;">
+                  <img src="proof-payment.PNG" alt="Поступление оплаты +490 ₽" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-payment.png';}">
+                  <div class="slide-badge">03 / 03 · Перевод +490 ₽ за сборник рецептов</div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-controls">
+              <button class="arrow-btn prev-btn" aria-label="Назад"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg></button>
+              <div class="carousel-dots"><span class="dot active" data-index="0"></span><span class="dot" data-index="1"></span><span class="dot" data-index="2"></span></div>
+              <button class="arrow-btn next-btn" aria-label="Вперед"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg></button>
+            </div>
+          </div>
+
+          <div class="telemetry-stack">
+            <div class="telemetry-card">
+              <div class="telemetry-row"><span class="telemetry-label">Просмотры</span><span class="telemetry-val">99 176</span></div>
+              <p class="telemetry-detail">Собрал один 30-секундный ролик о приготовлении драников за счет точного сценария.</p>
+            </div>
+            <div class="telemetry-card">
+              <div class="telemetry-row"><span class="telemetry-label">Оплата на карту</span><span class="telemetry-val teal">+490 ₽</span></div>
+              <p class="telemetry-detail">Прямой входящий платеж за электронный сборник рецептов в процессе просмотра ролика.</p>
+            </div>
+            <div class="telemetry-card">
+              <div class="telemetry-row"><span class="telemetry-label">Время запуска</span><span class="telemetry-val">14 дней</span></div>
+              <p class="telemetry-detail">От создания персонажа до стабильных оплат на карту без съемок на камеру.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Кейс 2: Астролог -->
+      <div class="showcase-stage last-case">
+        <div class="stage-header">
+          <div>
+            <span class="stage-tag">Кейс №2 // Экспертный блог</span>
+            <h2 class="stage-title">Проект «ИИ-эксперт: Астрология»</h2>
+          </div>
+          <div class="status-pill">ОРГАНИЧЕСКИЙ РОСТ</div>
+        </div>
+
+        <div class="stage-grid">
+          <div class="monitor-frame case-slider">
+            <div class="slider-viewport">
+              <div class="slider-track" style="width: 200%;">
+                <div class="slide-item" style="width: 50%;">
+                  <img src="case2-stats.jpg" alt="80 856 просмотров ролика" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='IMG_4053.jpg';}">
+                  <div class="slide-badge">01 / 02 · 80 856 просмотров и 293 подписчика</div>
+                </div>
+                <div class="slide-item" style="width: 50%;">
+                  <img src="case2-profile.jpg" alt="Портрет ИИ-астролога" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='Mj from Syntx.ai (4).jpg';}">
+                  <div class="slide-badge">02 / 02 · Фотореалистичный образ эксперта</div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-controls">
+              <button class="arrow-btn prev-btn" aria-label="Назад"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg></button>
+              <div class="carousel-dots"><span class="dot active" data-index="0"></span><span class="dot" data-index="1"></span></div>
+              <button class="arrow-btn next-btn" aria-label="Вперед"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg></button>
+            </div>
+          </div>
+
+          <div class="telemetry-stack">
+            <div class="telemetry-card">
+              <div class="telemetry-row"><span class="telemetry-label">Просмотры одного видео</span><span class="telemetry-val">80 856</span></div>
+              <p class="telemetry-detail">Ролик про самый везучий знак зодиака в 2027 году. Среднее время просмотра — 15 секунд.</p>
+            </div>
+            <div class="telemetry-card">
+              <div class="telemetry-row"><span class="telemetry-label">Новые подписчики</span><span class="telemetry-val teal">+293</span></div>
+              <p class="telemetry-detail">Пришло целевых подписчиков с одного короткого видео без вложений в рекламу.</p>
+            </div>
+            <div class="telemetry-card">
+              <div class="telemetry-row"><span class="telemetry-label">Реакции аудитории</span><span class="telemetry-val">501 / 311</span></div>
+              <p class="telemetry-detail">501 репост, 311 сохранений и 2 100 лайков — зрители доверяют персонажу.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Раздел Обо мне -->
+    <section class="container" id="about">
+      <div class="about-stage">
+        <div class="about-grid">
+          <div class="author-visual">
+            <img src="anna-photo.jpg" alt="Анна — продюсер коротких видео и создатель ИИ-персонажей" onerror="this.parentElement.style.display='none';">
+            <div class="author-badge">АННА · ПРОДЮСЕР REELS И ИИ-АВАТАРОВ</div>
+          </div>
+
+          <div class="about-content">
+            <span class="stage-tag">Кто ведет эфир</span>
+            <h2>Обо мне и опыте в других нишах</h2>
+            <p>
+              Меня зовут Анна. Я продюсер коротких видео и создатель ИИ-персонажей. Занимаюсь тем, что вывожу бренды и экспертов на миллионные охваты в Reels через точный сценарий и удержание внимания с первых секунд.
+            </p>
+            <p>
+              Все механики, которые приносили миллионы просмотров живым проектам, я перенесла на виртуальных блогеров — и на мастер-классе покажу, как эта система работает шаг за шагом.
+            </p>
+
+            <div class="about-highlights">
+              <div class="about-stat">
+                <div class="about-stat-val">25+ млн</div>
+                <div class="about-stat-label">Суммарных просмотров в клиентских проектах</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-val">10+ ниш</div>
+                <div class="about-stat-label">От стройматериалов и косметики до психологии</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Кейсы из других ниш (из статьи на Telegraph) -->
+      <div class="niche-cases-grid">
+        <div class="niche-card">
+          <div class="niche-thumb">
+            <img src="niche-kamichains.jpg" alt="Кейс Kami Chains" onerror="this.parentElement.style.display='none';">
+          </div>
+          <div class="niche-header">
+            <h3 class="niche-brand">Kami Chains</h3>
+            <span class="niche-tag">Украшения · Европа</span>
+          </div>
+          <div class="niche-metric">11+ млн просмотров</div>
+          <p class="niche-desc">Выход на международную аудиторию на английском языке. Ролики набрали до 4,6 млн просмотров, месячный охват вырос в 430 раз, аккаунт вырос с 8 352 до 10 040 подписчиков.</p>
+        </div>
+
+        <div class="niche-card">
+          <div class="niche-thumb">
+            <img src="niche-onmacabim.jpg" alt="Кейс Onmacabim" onerror="this.parentElement.style.display='none';">
+          </div>
+          <div class="niche-header">
+            <h3 class="niche-brand">Onmacabim</h3>
+            <span class="niche-tag">Косметика</span>
+          </div>
+          <div class="niche-metric">8,5 млн просмотров</div>
+          <p class="niche-desc">Три ролика-миллионника (3,3 млн, 3 млн и 1,3 млн), +1 000 новых подписчиков. Охват аккаунта вырос с 29 тысяч до 3,8 млн просмотров за месяц.</p>
+        </div>
+
+        <div class="niche-card">
+          <div class="niche-thumb">
+            <img src="niche-woodgrand.jpg" alt="Кейс Woodgrand" onerror="this.parentElement.style.display='none';">
+          </div>
+          <div class="niche-header">
+            <h3 class="niche-brand">Woodgrand</h3>
+            <span class="niche-tag">Террасная доска</span>
+          </div>
+          <div class="niche-metric">5,1 млн на одном ролике</div>
+          <p class="niche-desc">Оживили сложную производственную нишу через рубрику о мировой архитектуре. Аккаунт вырос с 7 895 до 9 185 подписчиков на чистой органике.</p>
+        </div>
+
+        <div class="niche-card">
+          <div class="niche-thumb">
+            <img src="niche-nikolas.jpg" alt="Кейс Golden Nikolas" onerror="this.parentElement.style.display='none';">
+          </div>
+          <div class="niche-header">
+            <h3 class="niche-brand">Golden Nikolas</h3>
+            <span class="niche-tag">B2B · Продвижение на картах</span>
+          </div>
+          <div class="niche-metric">1,9 млн и 927 тыс.</div>
+          <p class="niche-desc">Привлекли предпринимателей на узкопрофильный микроблог через истории о ярких рекламных кампаниях. Аудитория выросла в 2,3 раза (с 389 до 830 человек).</p>
+        </div>
+      </div>
+
+      <div class="niche-footnote">
+        Также есть успешные кейсы в нишах психологии, живого питания, горных лыж и подологии — алгоритмы соцсетей везде работают по одним и тем же правилам внимания.
+      </div>
+    </section>
+
+    <!-- Финальный призыв -->
+    <section class="container">
+      <div class="final-cta-box">
+        <span class="stage-tag" style="margin-bottom: 10px;">Участие бесплатное</span>
+        <h2>Приходите на прямой эфир 17 ноября в 18:00</h2>
+        <p>Напишите в личные сообщения ВКонтакте — пришлю ссылку на трансляцию и напоминание перед началом.</p>
+        <a href="https://vk.me/veronika_production" target="_blank" rel="noopener noreferrer" class="btn btn-teal">
+          Записаться на мастер-класс
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <p>© 2026 AI CREATOR LAB · БЕСПЛАТНЫЙ МАСТЕР-КЛАСС 17 НОЯБРЯ В 18:00 МСК</p>
+  </footer>
+
+  <!-- Скрипт каруселей -->
+  <script>
+    document.querySelectorAll('.case-slider').forEach((sliderContainer) => {
+      const track = sliderContainer.querySelector('.slider-track');
+      const dots = sliderContainer.querySelectorAll('.dot');
+      const prevBtn = sliderContainer.querySelector('.prev-btn');
+      const nextBtn = sliderContainer.querySelector('.next-btn');
+
+      if (!track || !dots.length) return;
+
+      let currentIndex = 0;
+      const totalSlides = dots.length;
+      const stepPercent = 100 / totalSlides;
+      let autoPlayTimer = null;
+
+      function goToSlide(index) {
+        currentIndex = (index + totalSlides) % totalSlides;
+        track.style.transform = `translateX(-${currentIndex * stepPercent}%)`;
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === currentIndex);
+        });
+      }
+
+      function nextSlide() {
+        goToSlide(currentIndex + 1);
+      }
+
+      function prevSlide() {
+        goToSlide(currentIndex - 1);
+      }
+
+      function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayTimer = setInterval(nextSlide, 4500);
+      }
+
+      function stopAutoPlay() {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+      }
+
+      if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); startAutoPlay(); });
+      if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); startAutoPlay(); });
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const targetIndex = parseInt(dot.getAttribute('data-index'), 10);
+          goToSlide(targetIndex);
+          startAutoPlay();
+        });
+      });
+
+      sliderContainer.addEventListener('mouseenter', stopAutoPlay);
+      sliderContainer.addEventListener('mouseleave', startAutoPlay);
+
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      track.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoPlay();
+      }, { passive: true });
+
+      track.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) nextSlide();
+          else prevSlide();
+        }
+        startAutoPlay();
+      }, { passive: true });
+
+      startAutoPlay();
+    });
+  </script>
+
+</body>
+</html>
