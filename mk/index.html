@@ -478,7 +478,6 @@
       filter: contrast(1.04) saturate(0.95);
     }
 
-    /* Легкая виньетка по краям изображений в слайдере */
     .slide-item::after {
       content: "";
       position: absolute;
@@ -603,9 +602,7 @@
       line-height: 1.4;
     }
 
-    /* ==========================================================================
-       Раздел «Обо мне» с бесшовной интеграцией портрета в палитру сайта
-       ========================================================================== */
+    /* Раздел «Обо мне» с бесшовной интеграцией портрета в палитру сайта */
     .about-stage {
       background: var(--bg-surface);
       border: 1px solid var(--border-medium);
@@ -624,7 +621,6 @@
       align-items: center;
     }
 
-    /* Студийный портрет в духе примера с бабушкой */
     .author-visual {
       position: relative;
       width: 100%;
@@ -639,7 +635,6 @@
       justify-content: center;
     }
 
-    /* Мягкое свечение позади портрета */
     .author-visual::before {
       content: "";
       position: absolute;
@@ -649,7 +644,6 @@
       z-index: 1;
     }
 
-    /* Встроенная цветокоррекция фото + плавное растворение краев в фон */
     .author-visual img {
       width: 100%;
       height: 100%;
@@ -663,7 +657,6 @@
       mask-image: radial-gradient(ellipse 86% 88% at 50% 46%, #000 58%, transparent 100%);
     }
 
-    /* Бирюзовый контровой оттенок поверх фото для единства со стилем */
     .author-visual::after {
       content: "";
       position: absolute;
@@ -760,7 +753,6 @@
       }
     }
 
-    /* Встроенная рамка для опционального скриншота кейса в цветах сайта */
     .niche-thumb {
       position: relative;
       width: 100%;
@@ -1082,15 +1074,15 @@
             <div class="slider-viewport">
               <div class="slider-track" style="width: 300%;">
                 <div class="slide-item" style="width: 33.333333%;">
-                  <img src="proof-stats.PNG" alt="99 176 просмотров ролика" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-stats.png';}">
+                  <img src="../proof-stats.PNG" alt="99 176 просмотров ролика" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='../proof-stats.png';}">
                   <div class="slide-badge">01 / 03 · 99 176 просмотров на одном ролике</div>
                 </div>
                 <div class="slide-item" style="width: 33.333333%;">
-                  <img src="proof-profile.PNG" alt="Лицо персонажа" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-profile.png';}">
+                  <img src="../proof-profile.PNG" alt="Лицо персонажа" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='../proof-profile.png';}">
                   <div class="slide-badge">02 / 03 · Персонаж с живой мимикой</div>
                 </div>
                 <div class="slide-item" style="width: 33.333333%;">
-                  <img src="proof-payment.PNG" alt="Поступление оплаты +490 ₽" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='proof-payment.png';}">
+                  <img src="../proof-payment.PNG" alt="Поступление оплаты +490 ₽" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='../proof-payment.png';}">
                   <div class="slide-badge">03 / 03 · Перевод +490 ₽ за сборник рецептов</div>
                 </div>
               </div>
@@ -1134,11 +1126,11 @@
             <div class="slider-viewport">
               <div class="slider-track" style="width: 200%;">
                 <div class="slide-item" style="width: 50%;">
-                  <img src="case2-stats.jpg" alt="80 856 просмотров ролика" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='IMG_4053.jpg';}">
+                  <img src="../case2-stats.jpg" alt="80 856 просмотров ролика" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='../IMG_4053.jpg';}">
                   <div class="slide-badge">01 / 02 · 80 856 просмотров и 293 подписчика</div>
                 </div>
                 <div class="slide-item" style="width: 50%;">
-                  <img src="case2-profile.jpg" alt="Портрет ИИ-астролога" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='Mj from Syntx.ai (4).jpg';}">
+                  <img src="../case2-profile.jpg" alt="Портрет ИИ-астролога" onerror="if(!this.dataset.retry){this.dataset.retry=1; this.src='../Mj from Syntx.ai (4).jpg';}">
                   <div class="slide-badge">02 / 02 · Фотореалистичный образ эксперта</div>
                 </div>
               </div>
@@ -1173,7 +1165,7 @@
       <div class="about-stage">
         <div class="about-grid">
           <div class="author-visual">
-            <img src="anna-photo.jpg" alt="Анна — продюсер коротких видео и создатель ИИ-персонажей" onerror="this.parentElement.style.display='none';">
+            <img src="../anna-photo.jpg" alt="Анна — продюсер коротких видео и создатель ИИ-персонажей" onerror="this.parentElement.style.display='none';">
             <div class="author-badge">АННА · ПРОДЮСЕР REELS И ИИ-АВАТАРОВ</div>
           </div>
 
@@ -1201,11 +1193,11 @@
         </div>
       </div>
 
-      <!-- Кейсы из других ниш (из статьи на Telegraph) -->
+      <!-- Кейсы из других ниш -->
       <div class="niche-cases-grid">
         <div class="niche-card">
           <div class="niche-thumb">
-            <img src="niche-kamichains.jpg" alt="Кейс Kami Chains" onerror="this.parentElement.style.display='none';">
+            <img src="../niche-kamichains.jpg" alt="Кейс Kami Chains" onerror="this.parentElement.style.display='none';">
           </div>
           <div class="niche-header">
             <h3 class="niche-brand">Kami Chains</h3>
@@ -1217,7 +1209,7 @@
 
         <div class="niche-card">
           <div class="niche-thumb">
-            <img src="niche-onmacabim.jpg" alt="Кейс Onmacabim" onerror="this.parentElement.style.display='none';">
+            <img src="../niche-onmacabim.jpg" alt="Кейс Onmacabim" onerror="this.parentElement.style.display='none';">
           </div>
           <div class="niche-header">
             <h3 class="niche-brand">Onmacabim</h3>
@@ -1229,7 +1221,7 @@
 
         <div class="niche-card">
           <div class="niche-thumb">
-            <img src="niche-woodgrand.jpg" alt="Кейс Woodgrand" onerror="this.parentElement.style.display='none';">
+            <img src="../niche-woodgrand.jpg" alt="Кейс Woodgrand" onerror="this.parentElement.style.display='none';">
           </div>
           <div class="niche-header">
             <h3 class="niche-brand">Woodgrand</h3>
@@ -1241,7 +1233,7 @@
 
         <div class="niche-card">
           <div class="niche-thumb">
-            <img src="niche-nikolas.jpg" alt="Кейс Golden Nikolas" onerror="this.parentElement.style.display='none';">
+            <img src="../niche-nikolas.jpg" alt="Кейс Golden Nikolas" onerror="this.parentElement.style.display='none';">
           </div>
           <div class="niche-header">
             <h3 class="niche-brand">Golden Nikolas</h3>
